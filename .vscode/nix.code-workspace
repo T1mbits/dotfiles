@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "dotfiles",
+			"path": "/home/Timbits/dotfiles"
+		},
+		{
+			"name": "arch dotfiles",
+			"path": "/home/Timbits/arch/Timbits/dotfiles"
+		}
+	],
+	"settings": {
+		"terminal.integrated.cwd": "/home/Timbits/dotfiles"
+	}
+}
