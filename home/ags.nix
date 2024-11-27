@@ -14,7 +14,7 @@ in
       ags.auth
       ags.apps
       ags.battery
-      #   ags.cava
+      ags.cava
       ags.greet
       ags.hyprland
       ags.mpris
