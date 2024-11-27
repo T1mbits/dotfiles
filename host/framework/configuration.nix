@@ -86,15 +86,24 @@
     ];
   };
 
-  fonts.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        "FiraCode"
-        "DroidSansMono"
-      ];
-    })
-  ];
+  fonts = {
+    enableDefaultPackages = true;
 
+    packages = with pkgs; [
+      (nerdfonts.override {
+        fonts = [
+          "FiraCode"
+        ];
+      })
+      inter
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+        sansSerif = [ "Inter" ];
+      };
+    };
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
