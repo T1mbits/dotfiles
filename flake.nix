@@ -53,9 +53,14 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    # TODO revert to unstable for astal + ags once m4 bug is patched in unstable
     ags = {
       url = "github:aylur/ags";
-      # TODO revert to unstable once m4 bug is patched in unstable
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    astal = {
+      url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
