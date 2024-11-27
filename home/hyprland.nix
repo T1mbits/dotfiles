@@ -1,10 +1,41 @@
-{ ... }:
+{ pkgs, ... }:
+let
+  cursorTheme = "Bibata-Modern-Classic";
+  cursorSize = 20;
+in
 {
   imports = [ ./terminal.nix ];
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = cursorTheme;
+    size = cursorSize;
+  };
+
+  gtk = {
+    enable = true;
+
+    theme = {
+      package = pkgs.arc-theme;
+      name = "Arc-Dark";
+    };
+
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus";
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      env = [ "XCURSOR_SIZE, ${toString cursorSize}" ];
+
+      exec-once = [
+        "hyprctl setcursor ${cursorTheme} ${toString cursorSize}"
+      ];
+
       monitor = [
         "DP-4, 1920x1080, 0x0, 1, bitdepth, 8"
         "eDP-1, 2160x1440, 1920x0, 1.5, bitdepth, 8"

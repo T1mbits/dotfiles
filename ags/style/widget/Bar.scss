@@ -1,0 +1,79 @@
+$bg-1: #ca4b33, #ed7532, #f19c4e, #ed7532, #ca4b33;
+$bg-2: #749182, #4a7473, #7f9985, #467374, #213542;
+
+$color-1: #47484e;
+$color-2: #542210;
+
+window.bar {
+    animation-play-state: running;
+
+    * {
+        -gtk-icon-effect: none;
+        -gtk-icon-shadow: none;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        // color: $font-colour;
+        // font-size: $font-size;
+        outline: none;
+        padding: 0;
+        text-shadow: none;
+        transition: none;
+        border-radius: 15px;
+    }
+
+    > centerbox {
+        margin: 6px 6px 2px 6px;
+        min-height: 26px;
+
+        .tray {
+            background: $color-1;
+            padding: 0 6px;
+        }
+
+        .workspaces {
+            box {
+                background-color: $color-2;
+                border-radius: 50%;
+                margin: 8px 2px;
+                min-height: 10px;
+                min-width: 10px;
+                transition: all 0.3s;
+
+                &.focused {
+                    background: linear-gradient(45deg, $bg-2);
+                    border-radius: 50px;
+                    margin: 7px 2px;
+                    min-height: 12px;
+                    min-width: 20px;
+
+                    label {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .audio-visualizer {
+            background: radial-gradient(circle at 100%, $bg-1);
+            padding: 0 14px;
+        }
+
+        .notification-indicator {
+            background: radial-gradient(circle at 100%, $bg-1);
+            font-weight: bold;
+            padding: 0 8px;
+        }
+
+        .system-status-n-a-b {
+            background: $color-1;
+            padding: 0 6px;
+        }
+
+        .system-status-b-t {
+            background: linear-gradient(45deg, $bg-2);
+            font-weight: bold;
+            padding: 0 8px;
+        }
+    }
+}

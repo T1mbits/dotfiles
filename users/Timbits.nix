@@ -2,8 +2,12 @@
   pkgs,
   ...
 }:
+let
+  nixbits = import ../derivations/nixbits.nix { inherit pkgs; };
+in
 {
   imports = [
+    ../home/ags.nix
     ../home/hyprland.nix
     ../home/terminal.nix
     # ../home/spotify.nix
@@ -23,6 +27,8 @@
       nil
       nixfmt-rfc-style
       bash-language-server
+      bottom
+      nixbits
     ];
 
     sessionVariables = {
