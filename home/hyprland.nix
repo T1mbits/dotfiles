@@ -1,6 +1,27 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [ ./terminal.nix ];
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 16;
+  };
+
+  gtk = {
+    enable = true;
+
+    theme = {
+      package = pkgs.arc-theme;
+      name = "Arc-Dark";
+    };
+
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus";
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
