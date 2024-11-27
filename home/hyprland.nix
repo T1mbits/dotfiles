@@ -6,7 +6,7 @@
     gtk.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
-    size = 16;
+    size = 24;
   };
 
   gtk = {
@@ -26,6 +26,12 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      env = [ "XCURSOR_SIZE, 24" ];
+
+      exec-once = [
+        "hyprctl setcursor Bibata-Modern-Classic"
+      ];
+
       monitor = [
         "DP-4, 1920x1080, 0x0, 1, bitdepth, 8"
         "eDP-1, 2160x1440, 1920x0, 1.5, bitdepth, 8"
