@@ -23,6 +23,7 @@
       nil
       nixfmt-rfc-style
       bash-language-server
+      bottom
     ];
 
     sessionVariables = {
