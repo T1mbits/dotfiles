@@ -3,16 +3,18 @@ let
   ags = inputs.ags.packages.${pkgs.system};
 in
 {
+  imports = [ inputs.ags.homeManagerModules.default ];
+
   programs.ags = {
     enable = true;
 
     configDir = ../ags;
 
-    extraPackages = with pkgs; [
+    extraPackages = [
       ags.auth
       ags.apps
       ags.battery
-      ags.cava
+      #   ags.cava
       ags.greet
       ags.hyprland
       ags.mpris

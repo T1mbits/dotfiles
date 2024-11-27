@@ -4,6 +4,7 @@
 }:
 {
   imports = [
+    ../home/ags.nix
     ../home/hyprland.nix
     ../home/terminal.nix
     # ../home/spotify.nix
