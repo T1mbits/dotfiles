@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }:
 let
-  ags = inputs.ags.${pkgs.system};
+  ags = inputs.ags.packages.${pkgs.system};
 in
 {
   programs.ags = {
