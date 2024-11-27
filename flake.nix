@@ -1,27 +1,6 @@
 {
   description = "Timbits' dotfiles";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager-unstable = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    oskars-dotfiles = {
-      url = "github:oskardotglobal/.dotfiles/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
   outputs =
     {
       self,
@@ -58,4 +37,27 @@
         };
       };
     };
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    ags.url = "github:aylur/ags";
+
+    oskars-dotfiles = {
+      url = "github:oskardotglobal/.dotfiles/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 }
