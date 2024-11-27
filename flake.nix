@@ -53,7 +53,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    ags.url = "github:aylur/ags";
+    ags = {
+      url = "github:aylur/ags";
+      # TODO revert to unstable once m4 bug is patched in unstable
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     oskars-dotfiles = {
       url = "github:oskardotglobal/.dotfiles/nix";
