@@ -86,8 +86,12 @@ push() {
         exit 0
     fi
 
+    git stash --keep-index -u
+
     echo "Initiating interactive rebase..."
     git rebase -i origin/$current_branch
+    
+    git stash pop
     
     echo "Add commit message and description..."
     git commit --amend --no-edit
