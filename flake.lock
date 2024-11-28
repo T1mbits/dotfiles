@@ -250,6 +250,39 @@
         "type": "github"
       }
     },
+    "nixCats": {
+      "inputs": {
+        "nixCats": "nixCats_2",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-OJXAdXqjzq6TaDAPk689kGAyU0cN+rkJw+s8mTnh3JA=",
+        "path": "./pkgs/nixCats",
+        "type": "path"
+      },
+      "original": {
+        "path": "./pkgs/nixCats",
+        "type": "path"
+      }
+    },
+    "nixCats_2": {
+      "locked": {
+        "lastModified": 1732710089,
+        "narHash": "sha256-coiK9H7JX3oMsuH/1juikBYIp6Y9CFcse9y5B2FjOH4=",
+        "owner": "BirdeeHub",
+        "repo": "nixCats-nvim",
+        "rev": "921d9769551e4bb35000f45478829c6407f7da8f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nixCats-nvim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1732632634,
@@ -376,6 +409,7 @@
         "astal": "astal_2",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
+        "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "oskars-dotfiles": "oskars-dotfiles"

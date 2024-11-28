@@ -70,5 +70,10 @@
       url = "github:oskardotglobal/.dotfiles/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixCats = {
+      url = "path:./pkgs/nixCats";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 }

@@ -68,6 +68,12 @@
   programs = {
     hyprland.enable = true;
     zsh.enable = true;
+
+    steam = {
+      enable = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -83,6 +89,8 @@
       brightnessctl
       alsa-utils
       playerctl
+      git
+      unzip
     ];
   };
 

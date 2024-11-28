@@ -6,11 +6,18 @@ in
 {
   imports = [ ./terminal.nix ];
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.bibata-cursors;
-    name = cursorTheme;
-    size = cursorSize;
+  home = {
+    packages = with pkgs; [
+      wl-clipboard
+      cliphist
+      wofi
+    ];
+    pointerCursor = {
+      gtk.enable = true;
+      package = pkgs.bibata-cursors;
+      name = cursorTheme;
+      size = cursorSize;
+    };
   };
 
   gtk = {
@@ -34,6 +41,8 @@ in
 
       exec-once = [
         "hyprctl setcursor ${cursorTheme} ${toString cursorSize}"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
       ];
 
       monitor = [
@@ -139,6 +148,8 @@ in
           ", XF86AudioPrev, exec, playerctl previous"
           ", XF86AudioPlay, exec, playerctl play-pause"
           ", XF86AudioNext, exec, playerctl next"
+
+          "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
 
           "$mod, 0, workspace, 10"
           "$mod SHIFT, 0, movetoworkspace, 10"

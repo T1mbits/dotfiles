@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  nixbits = import ../pkgs/nixbits.nix { inherit pkgs; };
+  nixbits = import ../pkgs/nixbits { inherit pkgs; };
 in
 {
   imports = [
@@ -8,6 +8,8 @@ in
     ./modules/hyprland.nix
     ./modules/terminal.nix
     ./modules/spotify.nix
+
+    ./modules/nixcats.nix
   ];
 
   home = {
@@ -17,15 +19,22 @@ in
     homeDirectory = "/home/Timbits";
 
     packages = with pkgs; [
+      bottom
       ranger
       tmux
+
       firefox
       vesktop # discord never krisp :(
+      ffmpeg-full
+      gimp
+
+      nixbits
+
+      dotnet-sdk_8
+      rustup
       nil
       nixfmt-rfc-style
       bash-language-server
-      bottom
-      nixbits
     ];
 
     sessionVariables = {
@@ -40,11 +49,8 @@ in
       userName = "Timbits";
       userEmail = "timbits1123@gmail.com";
     };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
     vscode.enable = true;
     home-manager.enable = true;
+    obs-studio.enable = true;
   };
 }

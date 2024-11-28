@@ -33,7 +33,8 @@ usage() {
 }
 
 check_diff() {
-    git diff -U0 -- *.nix -- $1
+    echo "$*"
+    git diff -U0 -- *.nix -- "$1"
     if [[ -z $? ]]; then
         echo "No changes detected, exiting."
         exit 0
@@ -60,9 +61,9 @@ nix_switch() {
 }
 
 home_switch() {
-    home_directories="${global_directories} ./home ./ags"
+    home_directories="$global_directories ./home ./ags"
 
-    check_diff $home_directories
+    check_diff "$home_directories"
 
     echo "Adding changes"
     git add $home_directories
@@ -83,6 +84,7 @@ flake_update() {
 push() {
     if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --other --exclude-standard)" ]; then
       echo "warning: Git tree $(pwd) is dirty"
+      exit 1
     fi
 
     current_branch=$(git rev-parse --abbrev-ref HEAD)
@@ -92,20 +94,13 @@ push() {
         exit 0
     fi
 
-    git stash --keep-index -u
-
     echo "Initiating interactive rebase..."
     git rebase -i origin/$current_branch
 
-    echo "Add commit message and description..."
-    git commit --amend --no-edit
-
-    echo "Pushing squashed commit..."
+    echo "Pushing squashed commit(s)..."
     git push
 
-    git stash pop
-
-    echo "Successfully pushed squashed commit with the following message: "$1"."
+    echo "Successfully pushed squashed commit."
 }
 
 # Check for valid parameters
