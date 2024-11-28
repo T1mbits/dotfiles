@@ -56,10 +56,10 @@ nix_switch() {
 }
 
 home_switch() {
-    check_diff "./home ./users ./themes ./ags"
+    check_diff "./home ./users ./themes ./derivations ./scripts ./ags"
 
     echo "Adding changes"
-    git add ./home ./users ./themes ./ags
+    git add ./home ./users ./themes ./derivations ./scripts ./ags
 
     echo "Rebuilding home-manager configuration..."
     home-manager switch --flake .#"$1" &> "home-manager.log" || { grep --color=always error "home-manager.log" && exit 1; }
