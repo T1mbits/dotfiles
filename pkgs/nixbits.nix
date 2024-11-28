@@ -3,7 +3,7 @@ pkgs.stdenv.mkDerivation {
   pname = "nixbits";
   version = "0.1.1";
 
-  src = ../scripts/nixbits.sh;
+  src = ./nixbits.sh;
 
   unpackPhase = "true";
   installPhase = ''

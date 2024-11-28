@@ -54,7 +54,7 @@
     oh-my-posh = {
       enable = true;
       enableZshIntegration = true;
-      settings = builtins.fromJSON (builtins.readFile ../themes/oh-my-posh/timbits.omp.json);
+      settings = builtins.fromJSON (builtins.readFile ../../themes/oh-my-posh/timbits.omp.json);
     };
     fzf = {
       enable = true;

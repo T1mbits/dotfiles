@@ -33,7 +33,9 @@
           extraSpecialArgs = {
             inherit inputs;
           };
-          modules = [ ./users/Timbits.nix ];
+          modules = [
+            ./home/Timbits.nix
+          ];
         };
       };
     };

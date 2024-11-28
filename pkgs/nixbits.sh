@@ -40,11 +40,15 @@ check_diff() {
     fi
 }
 
+global_directories="./themes ./pkgs"
+
 nix_switch() {
-    check_diff "./host ./themes ./derivations ./scripts ./flake.nix"
+    nixos_directories="$global_directories ./host"
+
+    check_diff "$nixos_directories ./flake.nix"
 
     echo "Adding changes"
-    git add ./host ./themes ./derivations ./scripts ./flake.*
+    git add $nixos_directories ./flake.*
 
     echo "Rebuilding NixOS system configuration..."
     sudo nixos-rebuild switch --flake .#"$1" &> "nixos-rebuild.log" || { grep --color=always error "nixos-rebuild.log" && exit 1; }
@@ -56,10 +60,12 @@ nix_switch() {
 }
 
 home_switch() {
-    check_diff "./home ./users ./themes ./derivations ./scripts ./ags"
+    home_directories="${global_directories} ./home ./ags"
+
+    check_diff $home_directories
 
     echo "Adding changes"
-    git add ./home ./users ./themes ./derivations ./scripts ./ags
+    git add $home_directories
 
     echo "Rebuilding home-manager configuration..."
     home-manager switch --flake .#"$1" &> "home-manager.log" || { grep --color=always error "home-manager.log" && exit 1; }
@@ -90,14 +96,14 @@ push() {
 
     echo "Initiating interactive rebase..."
     git rebase -i origin/$current_branch
-    
-    git stash pop
-    
+
     echo "Add commit message and description..."
     git commit --amend --no-edit
 
     echo "Pushing squashed commit..."
     git push
+
+    git stash pop
 
     echo "Successfully pushed squashed commit with the following message: "$1"."
 }
