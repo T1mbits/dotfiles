@@ -1,5 +1,5 @@
-{ stdenv, ... }:
-stdenv.mkDerivation rec {
+{ pkgs }:
+pkgs.stdenv.mkDerivation rec {
   pname = "nixbits";
   version = "0.1.1";
 
