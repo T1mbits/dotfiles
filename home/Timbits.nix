@@ -1,18 +1,13 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 let
-  nixbits = import ../derivations/nixbits.nix { inherit pkgs; };
+  nixbits = import ../pkgs/nixbits.nix { inherit pkgs; };
 in
 {
   imports = [
-    ../home/ags.nix
-    ../home/hyprland.nix
-    ../home/terminal.nix
-    ../home/spotify.nix
-
-    ../themes/rain-world
+    ./modules/ags.nix
+    ./modules/hyprland.nix
+    ./modules/terminal.nix
+    ./modules/spotify.nix
   ];
 
   home = {
