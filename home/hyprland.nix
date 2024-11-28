@@ -1,12 +1,16 @@
 { pkgs, ... }:
+let
+  cursorTheme = "Bibata-Modern-Classic";
+  cursorSize = 20;
+in
 {
   imports = [ ./terminal.nix ];
 
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 24;
+    name = cursorTheme;
+    size = cursorSize;
   };
 
   gtk = {
@@ -26,10 +30,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      env = [ "XCURSOR_SIZE, 24" ];
+      env = [ "XCURSOR_SIZE, ${toString cursorSize}" ];
 
       exec-once = [
-        "hyprctl setcursor Bibata-Modern-Classic"
+        "hyprctl setcursor ${cursorTheme} ${toString cursorSize}"
       ];
 
       monitor = [
