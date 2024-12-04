@@ -4,12 +4,7 @@ let
 in
 {
   imports = [
-    ./modules/ags.nix
-    ./modules/hyprland.nix
-    ./modules/terminal.nix
-    ./modules/spotify.nix
-
-    ./modules/nixcats.nix
+    ./modules
   ];
 
   home = {
@@ -22,6 +17,7 @@ in
       bottom
       ranger
       tmux
+      gitui
 
       firefox
       vesktop # discord never krisp :(

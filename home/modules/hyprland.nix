@@ -4,8 +4,6 @@ let
   cursorSize = 20;
 in
 {
-  imports = [ ./terminal.nix ];
-
   home = {
     packages = with pkgs; [
       wl-clipboard

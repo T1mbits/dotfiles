@@ -17,24 +17,22 @@ usage() {
     echo "Usage: $0 <COMMAND>"
     echo
     echo "A useful little script that helps simplify and automate Timbits' Nix configuration related tasks."
-    echo "This script assumes that the config is a flake. Using $0 push will trigger two interactive git"
-    echo "sessions, one for squashing commits (may remove in favor of automatically squashing) and one for"
-    echo "the commit message and description."
+    echo "This script assumes that the config is a flake. Using $0 push will trigger an interactive git session."
     echo
     echo "COMMAND:"
-    echo "  home <cfg_name>     Rebuild the specified home-manager configuration"
-    echo "  nixos <cfg_name>    Rebuild the specified NixOS system configuration"
-    echo "  push <msg>          Squash all unpushed changes and push with the given message"
+    echo "  home <cfg_name>		Rebuild the specified home-manager configuration"
+    echo "  nixos <cfg_name>		Rebuild the specified NixOS system configuration"
+    echo "  full <n_name> <c_name>	First rebuild the NixOS configuration, followed by the home-manager configuration"
+    echo "  push <msg>			Squash all unpushed changes and push with the given message"
     echo
     echo "EXAMPLES:"
     echo "  $0 home Timbits"
-    echo "  $0 push 'Added tmux'"
+    echo "  $0 full framework Timbits'"
     exit 1
 }
 
 check_diff() {
-    echo "$*"
-    git diff -U0 -- *.nix -- "$1"
+    git diff -U0 -- *.nix -- "$*"
     if [[ -z $? ]]; then
         echo "No changes detected, exiting."
         exit 0
@@ -83,7 +81,7 @@ flake_update() {
 
 push() {
     if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --other --exclude-standard)" ]; then
-      echo "warning: Git tree $(pwd) is dirty"
+      echo "error: Git tree $(pwd) is dirty"
       exit 1
     fi
 
@@ -126,6 +124,14 @@ case "$1" in
     push)
         push
         ;;
+    full)
+	if [ -z "$2" ] || [ -z "$3" ]; then
+	    echo "Error: You must provide two flake targets"
+	    exit
+	fi
+	nix_switch "$2"
+	home_switch "$3"
+	;;
     *)
         echo "Invalid command: $1"
         echo
