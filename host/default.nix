@@ -18,6 +18,8 @@
 
   environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
 
+  programs.ssh.startAgent = true;
+
   services = {
     pipewire = {
       enable = true;
