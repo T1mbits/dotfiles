@@ -138,6 +138,10 @@
           inherit (pkgs) nix-doc lua-language-server nixd;
           # and each will be its own sub category
         };
+
+	lsps = with pkgs; [
+          omnisharp-roslyn
+	];
       };
 
       # This is for plugins that will load at startup without using packadd:
@@ -353,7 +357,7 @@
           # or, whatever you named the package definition in the packageDefinitions set.
           # WARNING: MAKE SURE THESE DONT CONFLICT WITH OTHER INSTALLED PACKAGES ON YOUR PATH
           # That would result in a failed build, as nixos and home manager modules validate for collisions on your path
-          aliases = [ "nvim" "n" ];
+          # aliases = [ "nvim" "n" ];
 
           # explained below in the `regularCats` package's definition
           # OR see :help nixCats.flake.outputs.settings for all of the settings available

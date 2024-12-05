@@ -31,7 +31,6 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
-
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
@@ -57,6 +56,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
+      "input"
     ];
     shell = pkgs.zsh;
   };
@@ -70,6 +70,8 @@
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
     };
+
+    nix-ld.enable = true;
   };
 
   # List packages installed in system profile. To search, run:

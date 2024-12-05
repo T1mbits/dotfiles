@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   system,
   ...
 }:
@@ -16,7 +17,12 @@
     "flakes"
   ];
 
-  environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
+  environment.systemPackages = [
+    inputs.agenix.packages.${system}.default
+    pkgs.tailscale
+  ];
+
+  programs.ssh.startAgent = true;
 
   services = {
     pipewire = {
@@ -24,5 +30,6 @@
       pulse.enable = true;
     };
     openssh.enable = true;
+    tailscale.enable = true;
   };
 }

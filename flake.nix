@@ -71,11 +71,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixCats = {
-      url = "path:./pkgs/nixCats";
+    agenix.url = "github:ryantm/agenix";
+
+    timbits-nixvim = {
+      url = "path:./pkgs/nixvim";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
-    agenix.url = "github:ryantm/agenix";
   };
 }

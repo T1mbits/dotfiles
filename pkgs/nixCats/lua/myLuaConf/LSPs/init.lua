@@ -84,7 +84,6 @@ end
 -- servers.tsserver = {},
 -- servers.html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-
 if not require('nixCatsUtils').isNixCats and nixCats('lspDebugMode') then
   vim.lsp.set_log_level("debug")
 end

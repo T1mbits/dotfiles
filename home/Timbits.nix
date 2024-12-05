@@ -33,11 +33,17 @@ in
 
       nixbits
 
+      inputs.timbits-nixvim.packages.${pkgs.system}.default
+
       dotnet-sdk_8
+      omnisharp-roslyn
       rustup
       nil
       nixfmt-rfc-style
       bash-language-server
+
+      wineWowPackages.waylandFull
+      mono
     ];
 
     sessionVariables = {
