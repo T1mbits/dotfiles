@@ -16,10 +16,10 @@
         framework = nixpkgs-unstable.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs;
+            inherit inputs system;
           };
           modules = [
-            ./host/framework/configuration.nix
+            ./host/framework
           ];
         };
       };
@@ -75,5 +75,7 @@
       url = "path:./pkgs/nixCats";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    agenix.url = "github:ryantm/agenix";
   };
 }

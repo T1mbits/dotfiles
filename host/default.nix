@@ -1,4 +1,8 @@
-{ ... }:
+{
+  inputs,
+  system,
+  ...
+}:
 {
   boot.loader = {
     systemd-boot.enable = true;
@@ -12,8 +16,13 @@
     "flakes"
   ];
 
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
+  environment.systemPackages = [ inputs.agenix.packages.${system}.default ];
+
+  services = {
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
+    openssh.enable = true;
   };
 }

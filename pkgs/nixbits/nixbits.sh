@@ -42,7 +42,7 @@ check_diff() {
 global_directories="./themes ./pkgs"
 
 nix_switch() {
-    nixos_directories="$global_directories ./host"
+    nixos_directories="$global_directories ./host ./secrets"
 
     check_diff "$nixos_directories ./flake.nix"
 
@@ -72,11 +72,6 @@ home_switch() {
     git commit -m "home-manager $(home-manager generations | head -n 1 | cut -c-16)"
 
     echo "Successfully rebuilt and switched home-manager configuration."
-}
-
-flake_update() {
-    echo "Updating flake..."
-    sudo nix flake update
 }
 
 push() {
