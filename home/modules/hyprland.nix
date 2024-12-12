@@ -9,6 +9,7 @@ in
       wl-clipboard
       cliphist
       wofi
+      hyprshot
     ];
     pointerCursor = {
       gtk.enable = true;
@@ -147,7 +148,11 @@ in
           ", XF86AudioPlay, exec, playerctl play-pause"
           ", XF86AudioNext, exec, playerctl next"
 
-          "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+          "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+
+          "$mod, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m output -m active --silent"
+          "$mod CONTROL, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m window  --silent"
+          "$mod SHIFT, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m region --silent"
 
           "$mod, 0, workspace, 10"
           "$mod SHIFT, 0, movetoworkspace, 10"

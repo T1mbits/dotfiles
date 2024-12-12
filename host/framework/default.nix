@@ -8,6 +8,7 @@
     ../.
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # ../server
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -47,6 +48,10 @@
   services = {
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -89,6 +94,8 @@
       playerctl
       git
       unzip
+      zip
+      stunnel
     ];
   };
 

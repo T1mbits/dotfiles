@@ -22,8 +22,6 @@ in
 
     packages = with pkgs; [
       bottom
-      ranger
-      tmux
       gitui
 
       firefox
@@ -44,6 +42,8 @@ in
 
       wineWowPackages.waylandFull
       mono
+
+      python3
     ];
 
     sessionVariables = {

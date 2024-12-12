@@ -25,11 +25,17 @@
   programs.ssh.startAgent = true;
 
   services = {
-    pipewire = {
+    openssh = {
       enable = true;
-      pulse.enable = true;
+      ports = [
+        22
+        443
+      ];
     };
-    openssh.enable = true;
-    tailscale.enable = true;
+    tailscale = {
+      enable = true;
+      openFirewall = true;
+      useRoutingFeatures = "client";
+    };
   };
 }
