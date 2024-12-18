@@ -39,7 +39,7 @@ check_diff() {
     fi
 }
 
-global_directories="./themes ./pkgs"
+global_directories="./pkgs ./lib"
 
 nix_switch() {
     nixos_directories="$global_directories ./host ./secrets"

@@ -6,9 +6,7 @@
 {
   imports = [
     ../.
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # ../server
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -51,6 +49,20 @@
     pipewire = {
       enable = true;
       pulse.enable = true;
+    };
+
+    auto-cpufreq = {
+      enable = true;
+      settings = {
+        battery = {
+          governor = "powersave";
+          turbo = "never";
+        };
+        charger = {
+          governor = "performance";
+          turbo = "auto";
+        };
+      };
     };
   };
 

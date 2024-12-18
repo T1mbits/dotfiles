@@ -30,6 +30,15 @@
     ];
   };
 
+  systemd.services.blank-frame-buffer = {
+    description = "Turn off laptop display on boot by blanking the frame buffer";
+    after = [ "multi-user.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "/bin/bash -c 'echo 1 > /sys/class/graphics/fb0/blank'";
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [ 443 ];
 
   services = {

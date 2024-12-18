@@ -4,15 +4,15 @@
   ...
 }:
 let
-  nixbits = import ../pkgs/nixbits { inherit pkgs; };
+  nixbits = import ../../pkgs/nixbits { inherit pkgs; };
 in
 {
   imports = [
-    ./modules
+    ../modules
     inputs.agenix.homeManagerModules.default
   ];
 
-  age.secrets.test.file = ../secrets/test.age;
+  age.secrets.test.file = ../../secrets/test.age;
 
   home = {
     # DO NOT CHANGE THIS VERSION NUMBER UNLESS YOU KNOW WHAT YOU'RE DOING

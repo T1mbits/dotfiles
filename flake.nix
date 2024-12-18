@@ -4,40 +4,21 @@
   outputs =
     {
       self,
+      nixpkgs,
       nixpkgs-unstable,
+      home-manager,
       home-manager-unstable,
       ...
     }@inputs:
     let
-      system = "x86_64-linux";
+      nixpkgsMap = { inherit nixpkgs nixpkgs-unstable; };
+      homeManagerMap = { inherit home-manager home-manager-unstable; };
+
+      lib = import ./lib;
     in
     {
-      nixosConfigurations = {
-        framework = nixpkgs-unstable.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs system;
-          };
-          modules = [
-            ./host/framework
-          ];
-        };
-      };
-
-      homeConfigurations = {
-        Timbits = home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          extraSpecialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./home/Timbits.nix
-          ];
-        };
-      };
+      nixosConfigurations = lib.generateHosts { inherit nixpkgsMap inputs; };
+      homeConfigurations = lib.generateHomes { inherit homeManagerMap nixpkgsMap inputs; };
     };
 
   inputs = {
