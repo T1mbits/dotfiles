@@ -1,0 +1,33 @@
+@use "widget/Bar";
+@use "widget/Launcher";
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    -gtk-icon-effect: none;
+    -gtk-icon-shadow: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 0px;
+    margin: 0px;
+    text-shadow: none;
+    transition: none;
+    min-width: 0px;
+    min-height: 0px;
+}
+
+tooltip {
+    * {
+        all: unset;
+    }
+
+    > * > * {
+        background-color: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #000000;
+        color: #000000;
+        padding: 8px;
+        margin: 4px;
+    }
+}

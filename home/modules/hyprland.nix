@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 let
   cursorTheme = "Bibata-Modern-Classic";
   cursorSize = 20;
@@ -10,6 +10,8 @@ in
       cliphist
       wofi
       hyprshot
+      hyprpolkitagent
+      inputs.ags.packages.${pkgs.system}.ags
     ];
     pointerCursor = {
       gtk.enable = true;
@@ -42,6 +44,9 @@ in
         "hyprctl setcursor ${cursorTheme} ${toString cursorSize}"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        "systemctl --user start hyprpolkitagent"
+        "spotify --ozone-platform=wayland"
+        "vesktop --ozone-platform=wayland"
       ];
 
       monitor = [
@@ -154,6 +159,8 @@ in
           "$mod CONTROL, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m window  --silent"
           "$mod SHIFT, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m region --silent"
 
+          "$mod, Tab, exec, ags toggle launcher"
+
           "$mod, 0, workspace, 10"
           "$mod SHIFT, 0, movetoworkspace, 10"
         ]
@@ -182,5 +189,17 @@ in
         "$mod, mouse:273, resizewindow"
       ];
     };
+    extraConfig = ''
+      # window resize
+      bind = $mod, R, submap, resize
+
+      submap = resize
+      binde = , right, resizeactive, 10 0
+      binde = , left, resizeactive, -10 0
+      binde = , up, resizeactive, 0 -10
+      binde = , down, resizeactive, 0 10
+      bind = , escape, submap, reset
+      submap = reset
+    '';
   };
 }

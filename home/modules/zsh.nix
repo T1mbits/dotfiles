@@ -2,8 +2,10 @@
 {
   home.packages = with pkgs; [
     eza
+    fd
     zsh-fzf-tab
     zsh-vi-mode
+    zsh-fzf-history-search
   ];
 
   programs = {
@@ -38,14 +40,15 @@
 
       # zstyle ':completion:*' list-colors "${("s.:.") (builtins.readFile ./LS_COLORS.txt)}"
       initExtra = ''
-        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
         source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+        source ${pkgs.zsh-fzf-history-search}/share/zsh-fzf-history-search/zsh-fzf-history-search.zsh
 
         zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
         zstyle ':completion:*' menu no
-        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-        zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+        zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'
       '';
     };
 
@@ -146,6 +149,8 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      defaultCommand = "fd --type file -HE .git";
+      fileWidgetCommand = "fd --type file -HE .git";
     };
 
     zoxide = {

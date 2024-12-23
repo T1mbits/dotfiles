@@ -59,7 +59,7 @@ nix_switch() {
 }
 
 home_switch() {
-    home_directories="$global_directories ./home ./ags"
+    home_directories="$global_directories ./home"
 
     check_diff
 

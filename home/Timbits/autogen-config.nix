@@ -8,6 +8,8 @@
       "wheel"
       "networkmanager"
       "input"
+      "disk"
+      "docker"
     ];
     shell = "zsh";
   };

@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -9,10 +10,7 @@ in
 {
   imports = [
     ../modules
-    inputs.agenix.homeManagerModules.default
   ];
-
-  age.secrets.test.file = ../../secrets/test.age;
 
   home = {
     # DO NOT CHANGE THIS VERSION NUMBER UNLESS YOU KNOW WHAT YOU'RE DOING
@@ -30,6 +28,7 @@ in
       nixbits
 
       inputs.timbits-nixvim.packages.${pkgs.system}.default
+      inputs.timbits-ags.packages.${pkgs.system}.default
 
       dotnet-sdk_8
       omnisharp-roslyn

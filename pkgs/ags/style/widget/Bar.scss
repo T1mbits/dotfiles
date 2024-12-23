@@ -1,0 +1,87 @@
+window.bar {
+    > centerbox {
+        * {
+            border-radius: 16px;
+        }
+
+        .launcher {
+            background: #ffffff;
+            padding: 0px 20px 0px 10px;
+            border-radius: 0px 0px 40px 0px;
+
+            icon {
+                font-size: 24px;
+            }
+        }
+
+        .tray {
+            background: #ffffff;
+            padding: 4px 6px;
+            margin: 4px 0px;
+        }
+
+        .title {
+            margin: 4px 0px;
+        }
+
+        .workspaces {
+            background: #ffffff;
+            margin: 4px 0px;
+            padding: 5px 3px;
+
+            button {
+                background-color: #000000;
+                margin: 0px 3px;
+                padding: 6px;
+                transition: all 0.3s;
+                opacity: 0.5;
+
+                &.focused {
+                    min-width: 15px;
+                    opacity: 1;
+                }
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+
+        .battery {
+            background: #ffffff;
+            color: #000000;
+            padding: 0px 6px;
+            margin: 4px 0px;
+            border-radius: 16px;
+        }
+
+        .system-status {
+            background: #ffffff;
+            color: #000000;
+            padding: 4px 6px;
+            margin: 4px 0px;
+            border-radius: 16px;
+        }
+
+        .clock {
+            background: #ffffff;
+            color: #000000;
+            padding: 0px 15px 0px 25px;
+            border-radius: 0px 0px 0px 40px;
+            font-weight: bold;
+        }
+
+        .notification-indicator {
+            background: #ffffff;
+            color: #000000;
+            padding: 0px 8px;
+            margin: 4px 0px;
+            border-radius: 16px;
+        }
+
+        // .audio-visualizer {
+        //     background: radial-gradient(circle at 100%, $bg-1);
+        //     padding: 0px 54px;
+        // }
+    }
+}

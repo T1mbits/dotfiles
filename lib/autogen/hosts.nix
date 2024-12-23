@@ -28,7 +28,7 @@ let
           config = usersConfig // {
             isNormalUser = true;
             home = "/home/${name}";
-            extraGroups = nixpkgs.lib.mkOverride 0 (
+            extraGroups = nixpkgs.lib.mkOverride 1 (
               if builtins.elem name restrictedGroups.allowedUsers then
                 usersConfig.extraGroups
               else

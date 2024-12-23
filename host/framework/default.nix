@@ -2,7 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, ... }:
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 {
   imports = [
     ../.
@@ -37,6 +42,25 @@
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  # Comment this in the first time you want to connect to AirPods.
+  # In order to connect, you have to press the button on the back
+  # of the AirPods case.
+  # `breder` is only needed for the initial connection of the AirPods.
+  # Afterwards the mode can be relaxed to `dual` (the default) again.
+  #
+  # hardware.bluetooth.settings = {
+  #   General = {
+  #     ControllerMode = "bredr";
+  #   };
+  # };
+
+  networking.firewall.allowedUDPPorts = [ 5353 ];
+
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -64,6 +88,10 @@
         };
       };
     };
+
+    blueman.enable = true;
+    upower.enable = true;
+    gvfs.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -79,7 +107,11 @@
   # };
 
   programs = {
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
+    };
     zsh.enable = true;
 
     steam = {
@@ -94,7 +126,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-    pathsToLink = [ "/share/zsh" ];
     systemPackages = with pkgs; [
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
@@ -108,8 +139,12 @@
       unzip
       zip
       stunnel
+      gcc
+      llvmPackages.bintools
     ];
   };
+
+  virtualisation.docker.enable = true;
 
   fonts = {
     enableDefaultPackages = true;
@@ -125,6 +160,9 @@
       };
     };
   };
+
+  xdg.terminal-exec.enable = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

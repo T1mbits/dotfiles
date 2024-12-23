@@ -11,4 +11,7 @@ in
     nixfred
     timbits-nixfred
   ];
+  "spotify-player-id.age".publicKeys = [
+    timbits-nixfred
+  ];
 }

@@ -1,4 +1,11 @@
 export default {
+	missing: 'image-missing-symbolic',
+	fallback: {
+		executable: 'application-x-executable',
+	},
+	os: {
+		nix: 'nix-snowflake-symbolic',
+	},
 	package: 'package-x-generic-symbolic',
 	notification: {
 		active: 'notification-active-symbolic',
