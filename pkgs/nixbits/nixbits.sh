@@ -20,10 +20,10 @@ usage() {
     echo "This script assumes that the config is a flake. Using $0 push will trigger an interactive git session."
     echo
     echo "COMMAND:"
-    echo "  home <cfg_name>		Rebuild the specified home-manager configuration"
+    echo "  home <cfg_name>		    Rebuild the specified home-manager configuration"
     echo "  nixos <cfg_name>		Rebuild the specified NixOS system configuration"
     echo "  full <n_name> <c_name>	First rebuild the NixOS configuration, followed by the home-manager configuration"
-    echo "  push <msg>			Squash all unpushed changes and push with the given message"
+    echo "  push <msg>			    Squash all unpushed changes and push with the given message"
     echo
     echo "EXAMPLES:"
     echo "  $0 home Timbits"
@@ -32,7 +32,7 @@ usage() {
 }
 
 check_diff() {
-    git diff -U0 -- *.nix -- "$*"
+    git diff -U0
     if [[ -z $? ]]; then
         echo "No changes detected, exiting."
         exit 0
@@ -44,7 +44,7 @@ global_directories="./pkgs ./lib"
 nix_switch() {
     nixos_directories="$global_directories ./host ./secrets"
 
-    check_diff "$nixos_directories ./flake.nix"
+    check_diff
 
     echo "Adding changes"
     git add $nixos_directories ./flake.*
@@ -61,7 +61,7 @@ nix_switch() {
 home_switch() {
     home_directories="$global_directories ./home ./ags"
 
-    check_diff "$home_directories"
+    check_diff
 
     echo "Adding changes"
     git add $home_directories

@@ -67,16 +67,16 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.Timbits = {
-    isNormalUser = true;
-    home = "/home/Timbits";
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "input"
-    ];
-    shell = pkgs.zsh;
-  };
+  # users.users.Timbits = {
+  #   isNormalUser = true;
+  #   home = "/home/Timbits";
+  #   extraGroups = [
+  #     "wheel"
+  #     "networkmanager"
+  #     "input"
+  #   ];
+  #   shell = pkgs.zsh;
+  # };
 
   programs = {
     hyprland.enable = true;

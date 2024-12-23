@@ -1,77 +1,102 @@
+{ inputs }:
 let
-  getModuleOrEmpty = modulePath: if builtins.pathExists modulePath then import modulePath else { };
+  lib = rec {
+    hostDir = ../host;
+    homeDir = ../home;
+
+    getAutogenConfig =
+      {
+        baseDir,
+        name,
+      }:
+      let
+        path = "${baseDir}/${name}/autogen-config.nix";
+        configFile = if builtins.pathExists path then import path else { };
+      in
+      {
+        inherit inputs name;
+        system = configFile.system or "x86_64-linux";
+
+        nixpkgs = inputs.${configFile.nixpkgs or "nixpkgs-stable"};
+        home-manager = inputs.${configFile.home-manager or "home-manager-stable"};
+
+        users = configFile.users or [ ];
+        restrictedGroups = {
+          allowedUsers = configFile.restrictedGroups.allowedUsers or [ ];
+          groups = configFile.restrictedGroups.groups or [ ];
+        };
+
+        usersConfig = configFile.usersConfig or { };
+      };
+
+    generateConfigEntries =
+      {
+        baseDir,
+        configTemplate,
+        entryNames,
+      }:
+      builtins.listToAttrs (
+        map
+          (config: {
+            inherit (config) name value;
+          })
+          (
+            map (name: {
+              inherit name;
+              value = (
+                configTemplate (getAutogenConfig {
+                  inherit baseDir name;
+                })
+              );
+            }) entryNames
+          )
+      );
+  };
 in
 {
-  generateHosts =
-    {
-      nixpkgsMap,
-      inputs,
-    }:
-    let
-      hostsDir = ../host;
-
-      allHosts = map (
-        name:
-        let
-          config = getModuleOrEmpty (hostsDir + "/${name}/autogen-config.nix");
-
-          system = config.system or "x86_64-linux";
-        in
-        {
-          inherit name;
-          config = nixpkgsMap.${config.nixpkgs or "nixpkgs"}.lib.nixosSystem {
-            inherit system;
-            specialArgs = { inherit inputs system; };
-            modules = [
-              (hostsDir + "/${name}")
-            ];
-          };
-        }
-      ) (builtins.attrNames (builtins.readDir hostsDir));
-      hosts = builtins.filter (host: host.name != "default.nix") allHosts;
-    in
-    builtins.listToAttrs (
-      map (host: {
-        name = host.name;
-        value = host.config;
-      }) hosts
-    );
-
-  generateHomes =
-    {
-      homeManagerMap,
-      nixpkgsMap,
-      inputs,
-    }:
-    let
-      homeDir = ../home;
-
-      allHomes = map (
-        name:
-        let
-          config = getModuleOrEmpty (homeDir + "/${name}/autogen-config.nix");
-        in
-        {
-          inherit name;
-          config = homeManagerMap.${config.home-manager or "home-manager"}.lib.homeManagerConfiguration {
-            pkgs = import nixpkgsMap.${config.nixpkgs or "nixpkgs"} {
-              system = config.system or "x86_64-linux";
-              config.allowUnfree = true;
-            };
-            extraSpecialArgs = { inherit inputs; };
-            modules = [
-              (homeDir + "/${name}")
-            ];
-          };
-        }
-      ) (builtins.attrNames (builtins.readDir homeDir));
-      homes = builtins.filter (home: home.name != "modules") allHomes;
-    in
-
-    builtins.listToAttrs (
-      map (home: {
-        name = home.name;
-        value = home.config;
-      }) homes
-    );
+  autogen = {
+    hosts = import ./autogen/hosts.nix lib;
+    homes = import ./autogen/homes.nix lib;
+  };
 }
+# {
+#   generateHomes =
+#     {
+#       homeManagerMap,
+#       nixpkgsMap,
+#       inputs,
+#     }:
+#     let
+#       homes = map (
+#         name:
+#         let
+#           config = getModuleOrEmpty (homeDir + "/${name}/autogen-config.nix");
+#         in
+#         {
+#           inherit name;
+#           config = homeManagerMap.${config.home-manager or "home-manager"}.lib.homeManagerConfiguration {
+#             pkgs = import nixpkgsMap.${config.nixpkgs or "nixpkgs"} {
+#               system = config.system or "x86_64-linux";
+#               config.allowUnfree = true;
+#             };
+#             extraSpecialArgs = { inherit inputs; };
+#             modules = [
+#               (homeDir + "/${name}")
+#               {
+#                 home = {
+#                   username = name;
+#                   homeDirectory = "/home/${name}";
+#                 };
+#               }
+#             ];
+#           };
+#         }
+#       ) (builtins.filter (home: home != "modules") (builtins.attrNames (builtins.readDir homeDir)));
+#     in
+#     builtins.listToAttrs (
+#       map (home: {
+#         name = home.name;
+#         value = home.config;
+#       }) homes
+#     );
+# }

@@ -17,8 +17,6 @@ in
   home = {
     # DO NOT CHANGE THIS VERSION NUMBER UNLESS YOU KNOW WHAT YOU'RE DOING
     stateVersion = "24.11";
-    username = "Timbits";
-    homeDirectory = "/home/Timbits";
 
     packages = with pkgs; [
       bottom

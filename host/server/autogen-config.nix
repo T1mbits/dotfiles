@@ -1,10 +1,10 @@
 {
-  nixpkgs = "nixpkgs";
+  nixpkgs = "nixpkgs-stable";
   system = "x86_64-linux";
 
-  users = [ "Timbits" ];
+  users = [ "Serverbits" ];
   restrictedGroups = {
-    allowedUsers = [ "Timbits" ];
+    allowedUsers = [ "Serverbits" ];
     groups = [
       "root"
       "wheel"
