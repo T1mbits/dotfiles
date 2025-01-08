@@ -3,6 +3,9 @@ let
   lib = rec {
     hostDir = ../host;
     homeDir = ../home;
+    modulesDir = ../modules;
+
+    lib = (import inputs.nixpkgs { system = "x86_64-linux"; }).lib;
 
     getAutogenConfig =
       {
@@ -59,44 +62,3 @@ in
     homes = import ./autogen/homes.nix lib;
   };
 }
-# {
-#   generateHomes =
-#     {
-#       homeManagerMap,
-#       nixpkgsMap,
-#       inputs,
-#     }:
-#     let
-#       homes = map (
-#         name:
-#         let
-#           config = getModuleOrEmpty (homeDir + "/${name}/autogen-config.nix");
-#         in
-#         {
-#           inherit name;
-#           config = homeManagerMap.${config.home-manager or "home-manager"}.lib.homeManagerConfiguration {
-#             pkgs = import nixpkgsMap.${config.nixpkgs or "nixpkgs"} {
-#               system = config.system or "x86_64-linux";
-#               config.allowUnfree = true;
-#             };
-#             extraSpecialArgs = { inherit inputs; };
-#             modules = [
-#               (homeDir + "/${name}")
-#               {
-#                 home = {
-#                   username = name;
-#                   homeDirectory = "/home/${name}";
-#                 };
-#               }
-#             ];
-#           };
-#         }
-#       ) (builtins.filter (home: home != "modules") (builtins.attrNames (builtins.readDir homeDir)));
-#     in
-#     builtins.listToAttrs (
-#       map (home: {
-#         name = home.name;
-#         value = home.config;
-#       }) homes
-#     );
-# }

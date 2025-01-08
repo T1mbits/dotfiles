@@ -3,6 +3,8 @@
   homeDir,
   hostDir,
   generateConfigEntries,
+  lib,
+  modulesDir,
   ...
 }:
 let
@@ -60,6 +62,8 @@ generateConfigEntries {
       modules = [
         ("${hostDir}/${name}")
         {
+          imports = lib.filesystem.listFilesRecursive (modulesDir + "/nixos");
+
           users.users = (
             generateNixosUsers {
               inherit
@@ -74,7 +78,5 @@ generateConfigEntries {
       ];
     };
 
-  entryNames = (
-    builtins.filter (host: host != "default.nix") (builtins.attrNames (builtins.readDir hostDir))
-  );
+  entryNames = (builtins.attrNames (builtins.readDir hostDir));
 }

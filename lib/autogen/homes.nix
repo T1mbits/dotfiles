@@ -1,6 +1,8 @@
 {
-  homeDir,
   generateConfigEntries,
+  homeDir,
+  lib,
+  modulesDir,
   ...
 }:
 generateConfigEntries {
@@ -19,10 +21,13 @@ generateConfigEntries {
         inherit system;
         config.allowUnfree = true;
       };
+
       extraSpecialArgs = { inherit inputs; };
       modules = [
         (homeDir + "/${name}")
         {
+          imports = lib.filesystem.listFilesRecursive (modulesDir + "/home");
+
           home = {
             username = name;
             homeDirectory = "/home/${name}";
@@ -30,7 +35,5 @@ generateConfigEntries {
         }
       ];
     };
-  entryNames = (
-    builtins.filter (home: home != "modules") (builtins.attrNames (builtins.readDir homeDir))
-  );
+  entryNames = (builtins.attrNames (builtins.readDir homeDir));
 }

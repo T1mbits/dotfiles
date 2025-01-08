@@ -1262,12 +1262,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-4GM/BieM5z5xKRNe/+/VLekt7GNegsOEMOBQhjVRpVw=",
-        "path": "./pkgs/ags",
+        "narHash": "sha256-NFDAe1r7qJaOognO6HJLv5gCnrZxuAjC+/c8iBbEHgo=",
+        "path": "./derivations/ags",
         "type": "path"
       },
       "original": {
-        "path": "./pkgs/ags",
+        "path": "./derivations/ags",
         "type": "path"
       }
     },
@@ -1281,11 +1281,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-38PSqLtPdIB94z59im/KCtaIGpMsIPyzGNlCkJ+EgYc=",
-        "path": "./pkgs/nixvim",
+        "path": "./derivations/nixvim",
         "type": "path"
       },
       "original": {
-        "path": "./pkgs/nixvim",
+        "path": "./derivations/nixvim",
         "type": "path"
       }
     },

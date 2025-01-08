@@ -39,7 +39,7 @@
     };
 
     timbits-ags = {
-      url = "path:./pkgs/ags";
+      url = "path:./derivations/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -49,7 +49,7 @@
     };
 
     timbits-nixvim = {
-      url = "path:./pkgs/nixvim";
+      url = "path:./derivations/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

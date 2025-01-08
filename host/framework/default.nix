@@ -10,11 +10,9 @@
 }:
 {
   imports = [
-    ../.
     ./hardware-configuration.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "nixfred"; # Define your hostname.
@@ -42,11 +40,6 @@
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-
   # Comment this in the first time you want to connect to AirPods.
   # In order to connect, you have to press the button on the back
   # of the AirPods case.
@@ -58,6 +51,8 @@
   #     ControllerMode = "bredr";
   #   };
   # };
+
+  base.bluetooth.enable = true;
 
   networking.firewall.allowedUDPPorts = [ 5353 ];
 
@@ -89,22 +84,8 @@
       };
     };
 
-    blueman.enable = true;
-    upower.enable = true;
     gvfs.enable = true;
   };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.Timbits = {
-  #   isNormalUser = true;
-  #   home = "/home/Timbits";
-  #   extraGroups = [
-  #     "wheel"
-  #     "networkmanager"
-  #     "input"
-  #   ];
-  #   shell = pkgs.zsh;
-  # };
 
   programs = {
     hyprland = {
