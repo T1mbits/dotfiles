@@ -39,10 +39,10 @@ check_diff() {
     fi
 }
 
-global_directories="./derivations ./lib ./secrets"
+global_directories="./derivations ./lib ./secrets ./themes ./flake.*"
 
 nix_switch() {
-    nixos_directories="$global_directories ./host ./modules/nixos ./flake.*"
+    nixos_directories="$global_directories ./host ./modules/nixos"
 
     check_diff $nixos_directories 
 
@@ -51,7 +51,6 @@ nix_switch() {
 
     echo "Rebuilding NixOS system configuration..."
     sudo nixos-rebuild switch --flake .#"$1" &> "nixos-rebuild.log" || { grep --color=always error "nixos-rebuild.log" && exit 1; }
-    git add ./flake.lock # just in case inputs were changed
 
     git commit -m "nixos-rebuild $(nixos-rebuild list-generations | grep current | cut -c13-28)"
 

@@ -61,57 +61,57 @@ in
           # ];in
           # ((builtins.concatStringsSep "," nonicon_mappings) + " nonicons")
 
-          background_opacity = 0.9;
+          # background_opacity = 0.9;
 
-          # TODO replace with stylix, currently uses bluloco theme
-          foreground = "#b9c0cb";
-          background = "#282c34";
-          selection_foreground = "#282c34";
-          selection_background = "#b9c0cb";
+          # # TODO replace with stylix, currently uses bluloco theme
+          # foreground = "#b9c0cb";
+          # background = "#282c34";
+          # selection_foreground = "#282c34";
+          # selection_background = "#b9c0cb";
 
-          cursor = "#ffcc00";
-          cursor_text_color = "#282c34";
+          # cursor = "#ffcc00";
+          # cursor_text_color = "#282c34";
 
-          url_color = "#3375FF";
+          # url_color = "#3375FF";
 
-          active_tab_foreground = "#b9c0cb";
-          active_tab_background = "#44474D";
-          inactive_tab_foreground = "#6B6F79";
-          inactive_tab_background = "#1A1F27";
-          tab_bar_background = "#23272F";
-          tab_bar_margin_color = "none";
+          # active_tab_foreground = "#b9c0cb";
+          # active_tab_background = "#44474D";
+          # inactive_tab_foreground = "#6B6F79";
+          # inactive_tab_background = "#1A1F27";
+          # tab_bar_background = "#23272F";
+          # tab_bar_margin_color = "none";
 
-          #: black
-          color0 = "#41444d";
-          color8 = "#8f9aae";
+          # #: black
+          # color0 = "#41444d";
+          # color8 = "#8f9aae";
 
-          #: red
-          color1 = "#fc2f52";
-          color9 = "#ff6480";
+          # #: red
+          # color1 = "#fc2f52";
+          # color9 = "#ff6480";
 
-          #: green
-          color2 = "#25a45c";
-          color10 = "#3fc56b";
+          # #: green
+          # color2 = "#25a45c";
+          # color10 = "#3fc56b";
 
-          #: yellow
-          color3 = "#ff936a";
-          color11 = "#f9c859";
+          # #: yellow
+          # color3 = "#ff936a";
+          # color11 = "#f9c859";
 
-          #: blue
-          color4 = "#3476ff";
-          color12 = "#10b1fe";
+          # #: blue
+          # color4 = "#3476ff";
+          # color12 = "#10b1fe";
 
-          #: magenta
-          color5 = "#7a82da";
-          color13 = "#ff78f8";
+          # #: magenta
+          # color5 = "#7a82da";
+          # color13 = "#ff78f8";
 
-          #: cyan
-          color6 = "#4483aa";
-          color14 = "#5fb9bc";
+          # #: cyan
+          # color6 = "#4483aa";
+          # color14 = "#5fb9bc";
 
-          #: white
-          color7 = "#cdd4e0";
-          color15 = "#ffffff";
+          # #: white
+          # color7 = "#cdd4e0";
+          # color15 = "#ffffff";
         };
       };
     };

@@ -8,6 +8,8 @@
   ...
 }:
 let
+  trace = x: builtins.trace x x;
+
   generateNixosUsers =
     {
       nixpkgs,
@@ -20,10 +22,11 @@ let
         name:
         let
           usersConfig =
-            (getAutogenConfig {
-              inherit name;
-              baseDir = homeDir;
-            }).usersConfig;
+            trace
+              (getAutogenConfig {
+                inherit name;
+                baseDir = homeDir;
+              }).usersConfig;
         in
         {
           inherit name;

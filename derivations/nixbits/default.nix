@@ -1,7 +1,7 @@
 { pkgs }:
 pkgs.stdenv.mkDerivation {
   pname = "nixbits";
-  version = "0.1.1";
+  version = "0.1.3";
 
   src = ./nixbits.sh;
 

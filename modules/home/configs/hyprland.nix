@@ -35,29 +35,30 @@ in
           wofi
           hyprshot
           hyprpolkitagent
+          hyprpaper
         ];
 
-        pointerCursor = {
-          gtk.enable = true;
-          package = pkgs.bibata-cursors;
-          name = cursorTheme;
-          size = cursorSize;
-        };
+        # pointerCursor = {
+        #   gtk.enable = true;
+        #   package = pkgs.bibata-cursors;
+        #   name = cursorTheme;
+        #   size = cursorSize;
+        # };
       };
 
-      gtk = {
-        enable = true;
+      # gtk = {
+      #   enable = true;
 
-        theme = {
-          package = pkgs.arc-theme;
-          name = "Arc-Dark";
-        };
+      #   theme = {
+      #     package = pkgs.arc-theme;
+      #     name = "Arc-Dark";
+      #   };
 
-        iconTheme = {
-          package = pkgs.papirus-icon-theme;
-          name = "Papirus";
-        };
-      };
+      #   iconTheme = {
+      #     package = pkgs.papirus-icon-theme;
+      #     name = "Papirus";
+      #   };
+      # };
 
       wayland.windowManager.hyprland = {
         enable = true;
@@ -80,8 +81,8 @@ in
             gaps_out = 4;
             border_size = 2;
 
-            "col.active_border" = "rgb(ca4b33) rgb(ed7532) rgb(f19c4e) rgb(ed7532) rgb(ca4b33) 45deg";
-            "col.inactive_border" = "rgb(749182) rgb(4a7473) rgb(7f9985) rgb(7f9985) rgb(467374) 45deg";
+            # "col.active_border" = "rgb(ca4b33) rgb(ed7532) rgb(f19c4e) rgb(ed7532) rgb(ca4b33) 45deg";
+            # "col.inactive_border" = "rgb(749182) rgb(4a7473) rgb(7f9985) rgb(7f9985) rgb(467374) 45deg";
 
             resize_on_border = false;
             allow_tearing = false;
@@ -93,12 +94,12 @@ in
             active_opacity = 1.0;
             inactive_opacity = 1.0;
 
-            shadow = {
-              enabled = true;
-              range = 4;
-              render_power = 3;
-              color = "rgba(1a1a1aee)";
-            };
+            # shadow = {
+            #   enabled = true;
+            #   range = 4;
+            #   render_power = 3;
+            #   color = "rgba(1a1a1aee)";
+            # };
 
             blur = {
               enabled = true;

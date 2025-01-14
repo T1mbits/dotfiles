@@ -17,6 +17,7 @@ in
 
       firefox
       ffmpeg-full
+      imagemagick
       gimp
 
       nixbits
@@ -53,6 +54,10 @@ in
           "DP-4, 1920x1080, 0x0, 1, bitdepth, 8"
           "eDP-1, 2160x1440, 1920x0, 1.5, bitdepth, 8"
         ];
+      };
+      stylix = {
+        enable = true;
+        theme = "outskirts-blue";
       };
     };
 

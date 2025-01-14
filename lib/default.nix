@@ -13,7 +13,7 @@ let
         name,
       }:
       let
-        path = "${baseDir}/${name}/autogen-config.nix";
+        path = "${baseDir}/${name}/autogen.nix";
         configFile = if builtins.pathExists path then import path else { };
       in
       {
