@@ -35,7 +35,6 @@ in
           wofi
           hyprshot
           hyprpolkitagent
-          hyprpaper
         ];
 
         # pointerCursor = {

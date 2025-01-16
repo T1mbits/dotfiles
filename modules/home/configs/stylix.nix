@@ -25,7 +25,6 @@ in
   };
 
   config = mkIf cfg.enable {
-
     stylix = {
       enable = true;
 
@@ -46,7 +45,12 @@ in
         size = 20;
       };
 
-      targets.vscode.enable = false;
+      targets = {
+        hyprland.hyprpaper.enable = false;
+        vscode.enable = false;
+      };
     };
+
+    hm.services.swww.wallpaper = mkIf config.hm.services.swww.enable config.stylix.image;
   };
 }

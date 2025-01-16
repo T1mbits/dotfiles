@@ -52,7 +52,7 @@
       };
       stylix = {
         enable = true;
-        theme = "outskirts-blue";
+        theme = "outskirts-orange";
       };
     };
 
@@ -72,6 +72,8 @@
       # };
       vesktop.enable = true;
     };
+
+    services.swww.enable = true;
   };
 
   programs = {
