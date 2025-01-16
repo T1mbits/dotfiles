@@ -1,5 +1,5 @@
-{ pkgs }:
-pkgs.stdenv.mkDerivation {
+{ stdenv, ... }:
+stdenv.mkDerivation {
   pname = "nixbits";
   version = "0.1.3";
 

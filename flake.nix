@@ -2,13 +2,16 @@
   description = "Timbits' dotfiles";
 
   outputs =
-    { ... }@inputs:
+    { nixpkgs, ... }@inputs:
     let
-      lib = import ./lib { inherit inputs; };
+      lib = import ./lib {
+        inherit inputs;
+        pkgs = nixpkgs;
+      };
     in
     {
-      nixosConfigurations = lib.autogen.hosts;
-      homeConfigurations = lib.autogen.homes;
+      nixosConfigurations = lib.autogen.nixosConfigurations;
+      homeConfigurations = lib.autogen.homeConfigurations;
     };
 
   inputs = {

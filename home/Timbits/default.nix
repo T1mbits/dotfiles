@@ -3,9 +3,6 @@
   pkgs,
   ...
 }:
-let
-  nixbits = import ../../derivations/nixbits { inherit pkgs; };
-in
 {
   home = {
     # DO NOT CHANGE THIS VERSION NUMBER UNLESS YOU KNOW WHAT YOU'RE DOING
@@ -19,8 +16,6 @@ in
       ffmpeg-full
       imagemagick
       gimp
-
-      nixbits
 
       inputs.timbits-nixvim.packages.${pkgs.system}.default
 
@@ -59,6 +54,11 @@ in
         enable = true;
         theme = "outskirts-blue";
       };
+    };
+
+    drv = {
+      nixbits.enable = true;
+      todocli.enable = true;
     };
 
     programs = {
