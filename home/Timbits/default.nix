@@ -17,7 +17,7 @@
       imagemagick
       gimp
 
-      inputs.timbits-nixvim.packages.${pkgs.system}.default
+      # inputs.timbits-nixvim.packages.${pkgs.system}.default
 
       dotnet-sdk_8
       omnisharp-roslyn
@@ -42,6 +42,7 @@
     configs = {
       zsh.enable = true;
       kitty.enable = true;
+
       hyprland = {
         enable = true;
         laptop = true;
@@ -50,9 +51,10 @@
           "eDP-1, 2160x1440, 1920x0, 1.5, bitdepth, 8"
         ];
       };
+
       stylix = {
         enable = true;
-        theme = "outskirts-orange";
+        theme = "outskirts-blue";
       };
     };
 
@@ -63,13 +65,14 @@
 
     programs = {
       ags.enable = true;
+      nvf.enable = true;
       shell-utils.enable = true;
       spotify.enable = true;
-      # spotify-player = {
-      #   enable = true;
-      #   clientId = "f999b60be23f46c394ba8c738deea165";
-      #   deviceName = "nixfred spotify_player";
-      # };
+      spotify-player = {
+        enable = false;
+        clientId = "f999b60be23f46c394ba8c738deea165";
+        deviceName = "nixfred spotify_player";
+      };
       vesktop.enable = true;
     };
 

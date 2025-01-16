@@ -39,15 +39,13 @@ check_diff() {
     fi
 }
 
-global_directories="./derivations ./lib ./secrets ./themes ./flake.*"
+global_directories="./derivations ./host ./home ./lib ./modules ./secrets ./themes ./flake.*"
 
 nix_switch() {
-    nixos_directories="$global_directories ./host ./modules/nixos"
-
-    check_diff $nixos_directories 
+    check_diff $global_directories
 
     echo "Adding changes"
-    git add $nixos_directories
+    git add $global_directories
 
     echo "Rebuilding NixOS system configuration..."
     sudo nixos-rebuild switch --flake .#"$1" &> "nixos-rebuild.log" || { grep --color=always error "nixos-rebuild.log" && exit 1; }
@@ -58,12 +56,10 @@ nix_switch() {
 }
 
 home_switch() {
-    home_directories="$global_directories ./home ./modules/home"
-
-    check_diff $home_directories
+    check_diff $global_directories
 
     echo "Adding changes"
-    git add $home_directories
+    git add $global_directories
 
     echo "Rebuilding home-manager configuration..."
     home-manager switch --flake .#"$1" &> "home-manager.log" || { grep --color=always error "home-manager.log" && exit 1; }
