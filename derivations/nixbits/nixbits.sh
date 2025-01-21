@@ -32,20 +32,19 @@ usage() {
 }
 
 check_diff() {
-    git diff -U0 $*
+    git diff -U0
     if [[ -z $? ]]; then
         echo "No changes detected, exiting."
         exit 0
     fi
 }
 
-global_directories="./derivations ./host ./home ./lib ./modules ./secrets ./themes ./flake.*"
 
 nix_switch() {
-    check_diff $global_directories
+    check_diff
 
     echo "Adding changes"
-    git add $global_directories
+    git add .
 
     echo "Rebuilding NixOS system configuration..."
     sudo nixos-rebuild switch --flake .#"$1" &> "nixos-rebuild.log" || { grep --color=always error "nixos-rebuild.log" && exit 1; }
@@ -56,10 +55,10 @@ nix_switch() {
 }
 
 home_switch() {
-    check_diff $global_directories
+    check_diff
 
     echo "Adding changes"
-    git add $global_directories
+    git add .
 
     echo "Rebuilding home-manager configuration..."
     home-manager switch --flake .#"$1" &> "home-manager.log" || { grep --color=always error "home-manager.log" && exit 1; }

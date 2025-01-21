@@ -54,18 +54,14 @@
 
       stylix = {
         enable = true;
-        theme = "outskirts-blue";
+        theme = "outskirts-orange";
       };
-    };
-
-    drv = {
-      nixbits.enable = true;
-      todocli.enable = true;
     };
 
     programs = {
       ags.enable = true;
-      nvf.enable = true;
+      nixbits.enable = true;
+      nixCats.enable = true;
       shell-utils.enable = true;
       spotify.enable = true;
       spotify-player = {
@@ -73,6 +69,7 @@
         clientId = "f999b60be23f46c394ba8c738deea165";
         deviceName = "nixfred spotify_player";
       };
+      todocli.enable = true;
       vesktop.enable = true;
     };
 

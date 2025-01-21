@@ -111,7 +111,7 @@ in
         inherit system;
         specialArgs = { inherit inputs system; };
         modules = [
-          ("${dirs.hosts}/${name}")
+          "${dirs.hosts}/${name}"
           {
             imports = lib.flatten [
               (import ./derivations.nix { inherit dirs; }).nixosDrvModules
@@ -152,12 +152,12 @@ in
           config.allowUnfree = true;
         };
 
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { inherit inputs system; };
         modules = [
           (dirs.homes + "/${name}")
           {
             imports = lib.flatten [
-              (import ./derivations.nix { inherit dirs; }).homeDrvModules
+              # (import ./derivations.nix { inherit dirs; }).homeDrvModules
               (lib.filesystem.listFilesRecursive (dirs.modules + "/home"))
             ];
 

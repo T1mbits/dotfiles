@@ -65,10 +65,11 @@ in
           env = [ "XCURSOR_SIZE, ${toString cursorSize}" ];
 
           exec-once = [
-            "hyprctl setcursor ${cursorTheme} ${toString cursorSize}"
             "wl-paste --type text --watch cliphist store"
             "wl-paste --type image --watch cliphist store"
             "systemctl --user start hyprpolkitagent"
+            "systemctl --user start swww-daemon"
+            "desktop"
             "spotify --ozone-platform=wayland"
             "vesktop --ozone-platform=wayland"
           ];

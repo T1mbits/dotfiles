@@ -35,10 +35,6 @@ in
         };
       };
 
-      tmux = {
-        enable = true;
-      };
-
       zoxide.enable = true;
     };
   };
