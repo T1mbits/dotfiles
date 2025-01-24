@@ -15,8 +15,8 @@ in
         settings = {
           cursor_shape = "block";
 
-          font_family = "Fira Code";
-          font_size = 10;
+          # font_family = "Fira Code";
+          font_size = 11;
 
           symbol_map =
             let

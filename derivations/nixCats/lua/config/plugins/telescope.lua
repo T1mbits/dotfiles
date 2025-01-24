@@ -10,6 +10,7 @@ return {
 			{ '<leader>sf', mode = { 'n' }, desc = '[S]earch [F]iles' },
 			{ '<leader>sg', mode = { 'n' }, desc = '[S]earch [G]rep' },
 			{ '<leader>sk', mode = { 'n' }, desc = '[S]earch [K]eymaps' },
+			{ '<leader>sm', mode = { 'n' }, desc = '[S]earch harpoon [M]arks' },
 			{ '<leader>sp', mode = { 'n' }, desc = '[S]earch [P]rojects' },
 			{ '<leader>sw', mode = { 'n' }, desc = '[S]earch [W]ord(s)' },
 			{ '<leader>s/', mode = { 'n' }, desc = '[S]earch [/] in Open Files' },
@@ -24,6 +25,7 @@ return {
 
 			require('telescope').load_extension('fzf')
 			require('telescope').load_extension('projects')
+			require('telescope').load_extension('harpoon')
 
 			local builtin = require('telescope.builtin')
 			vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch [B]uffers' })
@@ -31,6 +33,9 @@ return {
 			vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
 			vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch with [G]rep' })
 			vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+			vim.keymap.set('n', '<leader>sm', function()
+				require('telescope').extensions.harpoon.marks({})
+			end, { desc = '[S]earch harpoon [M]arks' })
 			vim.keymap.set('n', '<leader>sp', function()
 				require('telescope').extensions.projects.projects({})
 			end, { desc = '[S]earch [P]rojects' })

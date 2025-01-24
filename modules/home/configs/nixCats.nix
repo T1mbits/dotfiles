@@ -7,11 +7,11 @@
 }:
 with lib;
 let
-  cfg = config.hm.programs.nixCats;
+  cfg = config.hm.configs.nixCats;
   nixCats = import ../../../derivations/nixCats { inherit inputs; };
 in
 {
-  options.hm.programs.nixCats = {
+  options.hm.configs.nixCats = {
     enable = mkEnableOption "Enable nixCats as NeoVim configuration";
   };
   config = mkIf cfg.enable {

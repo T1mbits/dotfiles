@@ -1,4 +1,5 @@
 local servers = {}
+servers.csharp_ls = {}
 servers.lua_ls = {
 	Lua = {
 		formatters = {
@@ -25,7 +26,7 @@ servers.nixd = {
 		},
 	},
 }
-servers.csharp_ls = {}
+servers.rust_analyzer = {}
 
 require('lze').load({
 	{

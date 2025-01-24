@@ -114,7 +114,6 @@ in
           "${dirs.hosts}/${name}"
           {
             imports = lib.flatten [
-              (import ./derivations.nix { inherit dirs; }).nixosDrvModules
               (lib.filesystem.listFilesRecursive (dirs.modules + "/nixos"))
             ];
 
@@ -157,7 +156,6 @@ in
           (dirs.homes + "/${name}")
           {
             imports = lib.flatten [
-              # (import ./derivations.nix { inherit dirs; }).homeDrvModules
               (lib.filesystem.listFilesRecursive (dirs.modules + "/home"))
             ];
 

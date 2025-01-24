@@ -16,6 +16,8 @@
       ffmpeg-full
       imagemagick
       gimp
+      krita
+      vlc
 
       # inputs.timbits-nixvim.packages.${pkgs.system}.default
 
@@ -26,6 +28,8 @@
       nixfmt-rfc-style
       bash-language-server
 
+      gtk4
+      gtk4-layer-shell
       wineWowPackages.waylandFull
       mono
 
@@ -52,16 +56,18 @@
         ];
       };
 
+      nixCats.enable = true;
       stylix = {
         enable = true;
-        theme = "outskirts-orange";
+        theme = "outskirts-blue";
       };
+      tmux.enable = true;
     };
 
     programs = {
       ags.enable = true;
       nixbits.enable = true;
-      nixCats.enable = true;
+      prism-launcher.enable = true;
       shell-utils.enable = true;
       spotify.enable = true;
       spotify-player = {

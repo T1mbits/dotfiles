@@ -7,7 +7,7 @@ let
   inherit (inputs.nixCats) utils;
   luaPath = "${./.}";
   forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
-  extra_pkg_config = {};
+  extra_pkg_config = { };
   dependencyOverlays = [
     (utils.standardPluginOverlay inputs)
   ];
@@ -32,6 +32,7 @@ let
         format = with pkgs; [
           csharpier
           stylua
+          mdformat
           nixfmt-rfc-style
         ];
 
@@ -96,11 +97,13 @@ let
             gitsigns-nvim
             indent-blankline-nvim
             lualine-nvim
+            render-markdown-nvim
             todo-comments-nvim
           ];
 
           utils = [
             comment-nvim
+            harpoon
             nvim-autopairs
             project-nvim
             nvim-surround

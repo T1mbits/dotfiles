@@ -21,13 +21,28 @@ return {
 		nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
 
 		local t_builtin = require('telescope.builtin')
-    -- stylua: ignore start
-    nmap('gr', function() t_builtin.lsp_references() end, '[G]oto [R]eferences')
-    nmap('gI', function() t_builtin.lsp_implementations() end, '[G]oto [I]mplementation')
-    nmap('<leader>ds', function() t_builtin.lsp_document_symbols() end, '[D]ocument [S]ymbols')
-    nmap('<leader>ws', function() t_builtin.lsp_dynamic_workspace_symbols() end, '[W]orkspace [S]ymbols')
+    	-- stylua: ignore start
+    	nmap('gr', function() t_builtin.lsp_references() end, '[G]oto [R]eferences')
+    	nmap('gI', function() t_builtin.lsp_implementations() end, '[G]oto [I]mplementation')
+    	nmap('<leader>ds', function() t_builtin.lsp_document_symbols() end, '[D]ocument [S]ymbols')
+    	nmap('<leader>ws', function() t_builtin.lsp_dynamic_workspace_symbols() end, '[W]orkspace [S]ymbols')
 		-- stylua: ignore end
 
+		-- Show diagnostics on hover
+		vim.api.nvim_create_autocmd('CursorHold', {
+			buffer = bufnr,
+			callback = function()
+				local opts = {
+					focusable = false,
+					close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+					border = 'rounded',
+					source = 'always',
+					prefix = ' ',
+					scope = 'cursor',
+				}
+				vim.diagnostic.open_float(nil, opts)
+			end,
+		})
 		-- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
 		--   vim.lsp.buf.format()
 		-- end, { desc = 'Format current buffer with LSP' })

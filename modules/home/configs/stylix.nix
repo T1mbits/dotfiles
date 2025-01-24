@@ -31,6 +31,13 @@ in
       image = themeDir + "/wallpaper.jpg";
       base16Scheme = themeDir + "/colours.yaml";
 
+      fonts = {
+        monospace = {
+          package = pkgs.nerd-fonts.fira-code;
+          name = "FiraCode Nerd Font Mono";
+        };
+      };
+
       opacity.terminal = 0.9;
 
       iconTheme = {

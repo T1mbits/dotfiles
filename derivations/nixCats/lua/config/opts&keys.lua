@@ -50,6 +50,9 @@ vim.o.completeopt = 'menu,preview,noselect'
 -- Enable 24-bit colour support
 vim.o.termguicolors = true
 
+-- Disable virtual text diagnostics message in favour of hover diagnostics
+vim.diagnostic.config({virtual_text = false})
+
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {

@@ -12,6 +12,7 @@ require('lze').load({
 				formatters_by_ft = {
 					cs = { 'csharpier' },
 					lua = { 'stylua' },
+					markdown = { 'mdformat' },
 					rust = { 'rustfmt' },
 				},
 				format_on_save = {

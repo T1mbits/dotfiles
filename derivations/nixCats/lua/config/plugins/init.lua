@@ -41,6 +41,27 @@ require('lze').load({
 		end,
 	},
 	{
+		'harpoon',
+		for_cat = 'general.utils',
+		event = 'DeferredUIEnter',
+		after = function(plugin)
+			local ui = require('harpoon.ui')
+
+			vim.keymap.set('n', '<leader>m', function()
+				require('harpoon.mark').add_file()
+			end, { desc = '[M]ark with harpoon' })
+			vim.keymap.set('n', 'g1', function()
+				ui.nav_file(1)
+			end, { desc = 'Go to file 1' })
+			vim.keymap.set('n', 'g2', function()
+				ui.nav_file(2)
+			end, { desc = 'Go to file 2' })
+			vim.keymap.set('n', 'g3', function()
+				ui.nav_file(3)
+			end, { desc = 'Go to file 3' })
+		end,
+	},
+	{
 		'lazydev.nvim',
 		for_cat = 'general.lsp',
 		cmd = { 'LazyDev' },
@@ -51,6 +72,14 @@ require('lze').load({
 					{ words = { 'nixCats' }, path = (require('nixCats').nixCatsPath or '') .. '/lua' },
 				},
 			})
+		end,
+	},
+	{
+		'render-markdown.nvim',
+		for_cat = 'general.ui',
+		ft = 'markdown',
+		after = function(plugin)
+			require('render-markdown').setup({})
 		end,
 	},
 	{
