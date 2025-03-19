@@ -28,8 +28,6 @@
       nixfmt-rfc-style
       bash-language-server
 
-      gtk4
-      gtk4-layer-shell
       wineWowPackages.waylandFull
       mono
 
@@ -77,6 +75,7 @@
       };
       todocli.enable = true;
       vesktop.enable = true;
+      yazi.enable = true;
     };
 
     services.swww.enable = true;

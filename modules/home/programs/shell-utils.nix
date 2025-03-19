@@ -27,13 +27,13 @@ in
         fileWidgetCommand = "fd --type file -HE .git";
       };
 
-      ranger = {
-        enable = true;
-        settings = {
-          preview_images = true;
-          preview_images_method = "kitty";
-        };
-      };
+      # ranger = {
+      #   enable = true;
+      #   settings = {
+      #     preview_images = true;
+      #     preview_images_method = "kitty";
+      #   };
+      # };
 
       zoxide.enable = true;
     };
