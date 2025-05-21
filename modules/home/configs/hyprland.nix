@@ -14,6 +14,7 @@ in
   options.hm.configs.hyprland = {
     enable = mkEnableOption "Enable Hyprland configs";
     laptop = mkEnableOption "Enable laptop specific configs, such as brightness control binds.";
+    hyprsunset = mkEnableOption "Enable automatic Hyprsunset";
     monitors = mkOption {
       type = types.listOf types.str;
       default = null;
@@ -26,6 +27,31 @@ in
         ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
         ", XF86MonBrightnessUp, exec, brightnessctl set 10%+"
       ];
+    })
+    (mkIf cfg.hyprsunset {
+      services.hyprsunset = {
+        enable = true;
+        transitions = {
+          sunrise = {
+            calendar = "*-*-* 06:00:00";
+            requests = [
+              [
+                "temperature"
+                "6000"
+              ]
+            ];
+          };
+          sunset = {
+            calendar = "*-*-* 21:00:00";
+            requests = [
+              [
+                "temperature"
+                "3000"
+              ]
+            ];
+          };
+        };
+      };
     })
     {
       home = {

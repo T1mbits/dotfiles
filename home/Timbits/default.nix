@@ -48,6 +48,7 @@
       hyprland = {
         enable = true;
         laptop = true;
+        hyprsunset = true;
         monitors = [
           "DP-4, 1920x1080, 0x0, 1, bitdepth, 8"
           "eDP-1, 2160x1440, 1920x0, 1.5, bitdepth, 8"
@@ -57,7 +58,15 @@
       nixCats.enable = true;
       stylix = {
         enable = true;
-        theme = "outskirts-blue";
+        theme = "outskirts-orange";
+        targetsToIgnore = [
+          [
+            "hyprland"
+            "hyprpaper"
+          ]
+          [ "vscode" ]
+          [ "vesktop" ]
+        ];
       };
       tmux.enable = true;
     };
@@ -74,7 +83,28 @@
         deviceName = "nixfred spotify_player";
       };
       todocli.enable = true;
-      vesktop.enable = true;
+      vesktop = {
+        enable = true;
+
+        # I don't use THAT many plugins...
+        plugins = [
+          "BetterGifPicker"
+          "CallTimer"
+          "ClearURLs"
+          "CopyUserURLs"
+          "DontRoundMyTimestamps"
+          "EmoteCloner"
+          "FakeNitro"
+          "FavoriteEmojiFirst"
+          "FavoriteGifSearch"
+          "FixSpotifyEmbeds"
+          "MessageLinkEmbeds"
+          "MessageLogger"
+          "NoF1"
+          "PreviewMessage"
+          "ReverseImageSearch"
+        ];
+      };
       yazi.enable = true;
     };
 

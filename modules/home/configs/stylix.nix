@@ -22,6 +22,12 @@ in
       default = null;
       description = "Path to theme directory (./themes directory as root)";
     };
+
+    targetsToIgnore = mkOption {
+      type = types.listOf (types.listOf types.str);
+      default = [ ];
+      description = "Programs to not apply stylix theming to";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -52,10 +58,15 @@ in
         size = 20;
       };
 
-      targets = {
-        hyprland.hyprpaper.enable = false;
-        vscode.enable = false;
-      };
+      targets = mkIf (length cfg.targetsToIgnore > 0) (
+        builtins.foldl' (
+          acc: path: acc // (path: foldr (key: acc: { ${key} = acc; }) { enable = false; } path) path
+        ) { } cfg.targetsToIgnore
+      );
+      # targets = {
+      #   hyprland.hyprpaper.enable = false;
+      #   vscode.enable = false;
+      # };
     };
 
     hm.services.swww.wallpaper = mkIf config.hm.services.swww.enable config.stylix.image;
