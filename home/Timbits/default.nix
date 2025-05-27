@@ -32,6 +32,8 @@
       mono
 
       python3
+
+      kicad
     ];
 
     sessionVariables = {
@@ -42,6 +44,8 @@
 
   hm = {
     configs = {
+      git.enable = true;
+
       zsh.enable = true;
       kitty.enable = true;
 
@@ -108,15 +112,13 @@
       yazi.enable = true;
     };
 
-    services.swww.enable = true;
+    services = {
+      ssh.enable = true;
+      swww.enable = true;
+    };
   };
 
   programs = {
-    git = {
-      enable = true;
-      userName = "Timbits";
-      userEmail = "timbits1123@gmail.com";
-    };
     vscode.enable = true;
     home-manager.enable = true;
     obs-studio.enable = true;

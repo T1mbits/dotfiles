@@ -1,4 +1,8 @@
-{ inputs, pkgs }:
+{
+  inputs,
+  pkgs,
+  self,
+}:
 let
   dirs = {
     derivations = ../derivations;
@@ -8,5 +12,12 @@ let
   };
 in
 {
-  autogen = import ./autogen.nix { inherit dirs inputs pkgs; };
+  autogen = import ./autogen.nix {
+    inherit
+      dirs
+      inputs
+      pkgs
+      self
+      ;
+  };
 }

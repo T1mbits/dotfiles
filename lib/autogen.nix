@@ -2,6 +2,7 @@
   dirs,
   inputs,
   pkgs,
+  self,
 }:
 let
   lib = pkgs.lib;
@@ -151,7 +152,7 @@ in
           config.allowUnfree = true;
         };
 
-        extraSpecialArgs = { inherit inputs system; };
+        extraSpecialArgs = { inherit inputs system self; };
         modules = [
           (dirs.homes + "/${name}")
           {
@@ -164,6 +165,7 @@ in
               homeDirectory = "/home/${name}";
             };
           }
+          inputs.agenix.homeManagerModules.default
         ];
       };
 

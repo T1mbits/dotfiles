@@ -2,10 +2,10 @@
   description = "Timbits' dotfiles";
 
   outputs =
-    { nixpkgs, ... }@inputs:
+    { self, nixpkgs, ... }@inputs:
     let
       lib = import ./lib {
-        inherit inputs;
+        inherit self inputs;
         pkgs = nixpkgs;
       };
     in
