@@ -103,6 +103,10 @@
 
     nix-ld.enable = true;
   };
+  custom.services = {
+    headscale.enable = true;
+    tailscale.enable = true;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
