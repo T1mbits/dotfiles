@@ -6,4 +6,10 @@ in
   "github.age".publicKeys = [
     timbits-nixfred
   ];
+  "codeberg.age".publicKeys = [
+    timbits-nixfred
+  ];
+  "git-signing.age".publicKeys = [
+    timbits-nixfred
+  ];
 }
