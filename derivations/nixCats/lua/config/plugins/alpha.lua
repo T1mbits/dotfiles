@@ -1,19 +1,28 @@
 local function dashboard_config()
 	local dashboard = require('alpha.themes.dashboard')
+	local splash_texts = {
+		"you're not supposed to be coding right now are you?",
+		"go to bed",
+		"ketchup is a smoothie",
+		"miscellaneous splash text brought to you by Timbits",
+		[["I turned off my screen time trackers because they made me sad"]],
+		"I wonder if this config is even complete",
+		"Go finish your current project before you start another one"
+	}
 	local ascii_image = {
-		[[                ██████    ██████]],
-		[[                ██  ██    ██  ██]],
-		[[                ██  ████████  ██]],
-		[[              ████            ██]],
-		[[            ████    ██    ██  ██]],
-		[[      ████████                ██]],
-		[[  ██████              ██      ██]],
-		[[████                          ██]],
-		[[██                            ██]],
-		[[████                        ████]],
-		[[  ████████████████████████████]],
-		[[]],
-		[[       hi-kwality scugvim]],
+		"                ██████    ██████",
+		"                ██  ██    ██  ██",
+		"                ██  ████████  ██",
+		"              ████            ██",
+		"            ████    ██    ██  ██",
+		"      ████████                ██",
+		"  ██████              ██      ██",
+		"████                          ██",
+		"██                            ██",
+		"████                        ████",
+		"  ████████████████████████████",
+		"",
+		"       hi-kwality scugvim",
 	}
 
 	local win_height = vim.api.nvim_win_get_height(0)
@@ -22,7 +31,7 @@ local function dashboard_config()
 	local padding_count = (win_height - 12 - 8 - 3) / 2
 
 	for _ = 1, padding_count, 1 do
-		table.insert(ascii_image, 1, [[]])
+		table.insert(ascii_image, 1, "")
 	end
 
 	dashboard.section.header.val = ascii_image
@@ -33,6 +42,8 @@ local function dashboard_config()
 		dashboard.button('SPC s f', '󰈞  Find file'),
 		dashboard.button('SPC q', '  Quit', '<Cmd>qa<CR>'),
 	}
+
+	dashboard.section.footer.val = splash_texts[math.random(#splash_texts)];
 
 	return dashboard.config
 end
