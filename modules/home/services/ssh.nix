@@ -34,7 +34,10 @@ in
     systemd.user.services.add-ssh-keys = {
       Unit = {
         Description = "Add SSH keys to ssh-agent";
-        After = [ "ssh-agent.service" ];
+        After = [
+          "ssh-agent.service"
+          "agenix.service"
+        ];
         PartOf = [ "ssh-agent.service" ];
       };
       Service = {
