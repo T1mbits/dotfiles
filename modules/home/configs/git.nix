@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  self,
+  ...
+}:
 with lib;
 let
   cfg = config.hm.configs.git;
@@ -26,8 +31,13 @@ in
       };
 
       extraConfig = {
-        gpg.format = "ssh";
-        gpg."ssh".program = "ssh-keygen";
+        gpg = {
+          format = "ssh";
+          ssh = {
+            program = "ssh-keygen";
+            allowedSignersFile = "${self}/secrets/ssh/allowed_signers";
+          };
+        };
       };
     };
   };
