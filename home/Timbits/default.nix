@@ -34,6 +34,7 @@
       python3
 
       kicad
+      gnuplot
     ];
 
     sessionVariables = {
