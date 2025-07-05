@@ -40,6 +40,7 @@ let
 
         csharp = with pkgs; [
           csharp-ls
+          dotnet-sdk_9
         ];
 
         neonixdev = with pkgs; [
