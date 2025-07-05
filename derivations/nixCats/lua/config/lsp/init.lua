@@ -2,6 +2,7 @@ local servers = {}
 servers.csharp_ls = {
 	cmd_env = {
 		DOTNET_ROOT = nixCats.extra["dotnet-sdk"].sdk_9;
+		DOTNET_MULTI_LOOKUP = "0";
 		PATH = nixCats.extra["dotnet-sdk"].sdk_9 .. "/bin" .. vim.env.PATH;
 	}
 }
