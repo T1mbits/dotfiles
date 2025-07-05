@@ -175,6 +175,9 @@ let
           nixdExtras = {
             nixpkgs = nixpkgs;
           };
+          dotnet-sdk = {
+            sdk_9 = pkgs.dotnet-sdk_9;
+          };
         };
       };
   };

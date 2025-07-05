@@ -1,5 +1,10 @@
 local servers = {}
-servers.csharp_ls = {}
+servers.csharp_ls = {
+	cmd_env = {
+		DOTNET_ROOT = nixCats.extra["dotnet-sdk"].sdk_9;
+		PATH = nixCats.extra["dotnet-sdk"].sdk_9 .. "/bin" .. vim.env.PATH;
+	}
+}
 servers.lua_ls = {
 	Lua = {
 		formatters = {
