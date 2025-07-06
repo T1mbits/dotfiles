@@ -28,7 +28,7 @@ require('lze').load({
 		end,
 		before = function(_)
 			vim.lsp.config('*', {
-				on_attach = require('config.lsp.configure').on_attach,
+				on_attach = require('config.lsp.on_attach')
 			})
 		end,
 	},
