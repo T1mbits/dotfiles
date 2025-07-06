@@ -36,23 +36,29 @@ let
           nixfmt-rfc-style
         ];
 
-        rust = with pkgs; [ ];
+        neonixdev = with pkgs; [
+          nixd
+          nix-doc
+          lua-language-server
+        ];
+        
+        # rust_analyzer and rustfmt are part of rustup/cargo toolchain so this is just a marker for nixCats config
+        rust = [];
 
         csharp = with pkgs; [
           csharp-ls
           dotnet-sdk_9
         ];
 
-        neonixdev = with pkgs; [
-          nixd
-          nix-doc
-          lua-language-server
+        bash = with pkgs; [
+          bash-language-server
         ];
       };
 
       startupPlugins = {
         general = with pkgs.vimPlugins; [
           lze
+          lzextras
           plenary-nvim
           nvim-web-devicons
         ];
@@ -166,7 +172,9 @@ let
           general = true;
           format = true;
           neonixdev = true;
+          rust = true;
           csharp = true;
+          bash = true;
         };
         extra = {
           # to keep the categories table from being filled with non category things that you want to pass

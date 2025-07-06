@@ -21,7 +21,7 @@
 
       # inputs.timbits-nixvim.packages.${pkgs.system}.default
 
-      dotnet-sdk_8
+      dotnet-sdk_9
       omnisharp-roslyn
       rustup
       nil
