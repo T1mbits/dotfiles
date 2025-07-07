@@ -1,7 +1,7 @@
 return {
 	{
 		'telescope.nvim',
-		for_cat = 'general.telescope',
+		for_cat = 'general.ui.telescope',
 		cmd = { 'Telescope' },
 		on_require = { 'telescope' },
 		keys = {
@@ -19,13 +19,21 @@ return {
 		load = function(name)
 			vim.cmd.packadd(name)
 			vim.cmd.packadd('telescope-fzf-native.nvim')
+			vim.cmd.packadd('telescope-ui-select.nvim')
 		end,
-		after = function(plugin)
-			require('telescope').setup({})
+		after = function(_)
+			require('telescope').setup({
+				extensions = {
+					['ui-select'] = {
+						require('telescope.themes').get_cursor(),
+					},
+				},
+			})
 
 			require('telescope').load_extension('fzf')
 			require('telescope').load_extension('projects')
 			require('telescope').load_extension('harpoon')
+			require('telescope').load_extension('ui-select')
 
 			local builtin = require('telescope.builtin')
 			vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch [B]uffers' })
@@ -48,7 +56,7 @@ return {
 			end, { desc = '[S]earch [/] in Open Files' })
 			vim.keymap.set('n', '<leader>/', function()
 				builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-					winblend = 10,
+					winblend = 0,
 					previewer = false,
 				}))
 			end, { desc = '[/] Fuzzy search buffer' })

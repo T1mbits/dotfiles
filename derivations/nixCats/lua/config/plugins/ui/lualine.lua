@@ -17,15 +17,14 @@ end
 return {
 	{
 		'lualine.nvim',
+		for_cat = 'general.ui.status',
 		after = function()
 			require('lualine').setup({
 				sections = {
 					lualine_a = {
 						{
 							'mode',
-							fmt = function(mode)
-								return string.lower(mode)
-							end,
+							fmt = string.lower,
 						},
 					},
 					lualine_b = { 'branch', { 'diff', colored = true } },

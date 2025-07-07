@@ -28,7 +28,7 @@ require('lze').load({
 		end,
 		before = function(_)
 			vim.lsp.config('*', {
-				on_attach = require('config.lsp.on_attach')
+				on_attach = require('config.lsp.on_attach'),
 			})
 		end,
 	},
@@ -80,20 +80,19 @@ require('lze').load({
 	},
 	{
 		'rust_analyzer',
-		-- rust_analyzer is a special case since it's best to use the rust_analyzer installed from rustup, so the nixCats cat is purely a marker
 		for_cat = 'rust',
 		lsp = {
 			filetypes = { 'rust' },
 		},
 	},
 	{
-		'csharp-ls',
+		'csharp_ls',
 		for_cat = 'csharp',
 		lsp = {
 			filetypes = { 'cs' },
 			cmd_env = {
 				DOTNET_ROOT = nixCats.extra['dotnet-sdk'].sdk_9 .. '/share/dotnet',
-				DOTNET_MULTILEVEL_LOOKUP = '0',
+				DOTNET_MULTILEVEL_LOOKUP = 0,
 				PATH = nixCats.extra['dotnet-sdk'].sdk_9 .. '/bin' .. vim.env.PATH,
 			},
 		},

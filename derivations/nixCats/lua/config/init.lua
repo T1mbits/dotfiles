@@ -10,4 +10,4 @@ require('config.plugins')
 
 require('config.lsp')
 
-require('config.format')
+require('config.scripts')

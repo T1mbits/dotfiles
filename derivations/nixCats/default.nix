@@ -1,7 +1,7 @@
 {
   inputs,
   ...
-}@attrs:
+}:
 let
   inherit (inputs) nixpkgs;
   inherit (inputs.nixCats) utils;
@@ -15,13 +15,15 @@ let
   categoryDefinitions =
     {
       pkgs,
-      settings,
-      categories,
-      extra,
-      name,
-      mkNvimPlugin,
+      /*
+        settings,
+        categories,
+        extra,
+        name,
+        mkNvimPlugin,
+      */
       ...
-    }@packageDef:
+    }:
     {
       lspsAndRuntimeDeps = {
         general = with pkgs; [
@@ -41,9 +43,9 @@ let
           nix-doc
           lua-language-server
         ];
-        
+
         # rust_analyzer and rustfmt are part of rustup/cargo toolchain so this is just a marker for nixCats config
-        rust = [];
+        rust = [ ];
 
         csharp = with pkgs; [
           csharp-ls
@@ -88,24 +90,49 @@ let
             cellular-automaton-nvim
           ];
 
-          telescope = [
-            telescope-fzf-native-nvim
-            telescope-nvim
-          ];
-
           treesitter = [
             nvim-treesitter.withAllGrammars
           ];
 
-          ui = [
-            alpha-nvim
-            dressing-nvim
-            fidget-nvim
-            gitsigns-nvim
-            indent-blankline-nvim
-            lualine-nvim
-            render-markdown-nvim
-            todo-comments-nvim
+          # plugins whos main purpose is providing a UI (change) of some sort
+          ui = {
+            colorscheme = [
+              bluloco-nvim
+              transparent-nvim
+            ];
+
+            dashboard = [
+              alpha-nvim
+            ];
+
+            misc = [
+              indent-blankline-nvim
+              render-markdown-nvim
+              todo-comments-nvim
+            ];
+
+            status = [
+              nvim-lightbulb
+              fidget-nvim
+              gitsigns-nvim
+              lualine-nvim
+            ];
+
+            telescope = [
+              telescope-fzf-native-nvim
+              telescope-ui-select-nvim
+              telescope-nvim
+            ];
+
+            text-decoration = [
+              indent-blankline-nvim
+              rainbow-delimiters-nvim
+            ];
+          };
+
+          # contains many other plugins from various categories, so naturally I gave it its own category :P
+          snacks = [
+            snacks-nvim
           ];
 
           utils = [
@@ -129,20 +156,26 @@ let
       };
 
       sharedLibraries = {
-        general = with pkgs; [
-        ];
+        /*
+          general = with pkgs; [
+          ];
+        */
       };
 
       environmentVariables = {
-        test = {
-          CATTESTVAR = "It worked!";
-        };
+        /*
+          test = {
+            CATTESTVAR = "It worked!";
+          };
+        */
       };
 
       extraWrapperArgs = {
-        test = [
-          ''--set CATTESTVAR2 "It worked again!"''
-        ];
+        /*
+          test = [
+            ''--set CATTESTVAR2 "It worked again!"''
+          ];
+        */
       };
 
       extraPython3Packages = {
@@ -167,6 +200,8 @@ let
             "vi"
           ];
           # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+          suffix-path = true;
+          suffix-LD = true;
         };
         categories = {
           general = true;

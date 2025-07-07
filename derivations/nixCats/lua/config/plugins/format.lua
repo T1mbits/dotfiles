@@ -1,11 +1,11 @@
-require('lze').load({
+return {
 	{
 		'conform.nvim',
 		for_cat = 'format',
 		keys = {
 			{ '<leader>FF', desc = '[F]ormat [F]ile' },
 		},
-		after = function(plugin)
+		after = function(_)
 			local conform = require('conform')
 
 			conform.setup({
@@ -30,4 +30,4 @@ require('lze').load({
 			end, { desc = '[F]ormat [F]ile' })
 		end,
 	},
-})
+}

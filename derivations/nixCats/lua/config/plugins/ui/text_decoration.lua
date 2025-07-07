@@ -1,18 +1,19 @@
+local highlight = {
+	'RainbowRed',
+	'RainbowYellow',
+	'RainbowBlue',
+	'RainbowOrange',
+	'RainbowGreen',
+	'RainbowViolet',
+	'RainbowCyan',
+}
+
 return {
 	{
 		'indent-blankline.nvim',
-		for_cat = 'general.ui',
+		for_cat = 'general.ui.text-decoration',
 		event = 'DeferredUIEnter',
-		after = function(plugin)
-			local highlight = {
-				'RainbowRed',
-				'RainbowYellow',
-				'RainbowBlue',
-				'RainbowOrange',
-				'RainbowGreen',
-				'RainbowViolet',
-				'RainbowCyan',
-			}
+		after = function(_)
 			local hooks = require('ibl.hooks')
 			-- create the highlight groups in the highlight setup hook, so they are reset
 			-- every time the colorscheme changes
@@ -29,6 +30,14 @@ return {
 			require('ibl').setup({ scope = { highlight = highlight } })
 
 			hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+		end,
+	},
+	{
+		'rainbow-delimiters.nvim',
+		for_cat = 'general.ui.text-decoration',
+		event = 'DeferredUIEnter',
+		after = function()
+			vim.g.rainbow_delimiters = { highlight = highlight }
 		end,
 	},
 }

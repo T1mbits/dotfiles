@@ -3,8 +3,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Display whitespace characters
--- vim.opt.list = true
--- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.list = true
+vim.opt.listchars = { tab = '▎ ', --[[ eol = '↵', ]] trail = '·', nbsp = '␣' }
 
 -- Hide default mode and search count indicator (lualine provides the indicators)
 vim.o.showmode = false
@@ -37,7 +37,7 @@ vim.o.smartcase = true
 
 -- Enable signcolumn and relative line numbers by default
 -- x amount of signcolumn slots simultaneously
-vim.wo.signcolumn = 'yes:2'
+vim.wo.signcolumn = 'yes:1'
 vim.wo.relativenumber = true
 
 -- Decrease update time
@@ -50,8 +50,8 @@ vim.o.completeopt = 'menu,preview,noselect'
 -- Enable 24-bit colour support
 vim.o.termguicolors = true
 
--- Disable virtual text diagnostics message in favour of hover diagnostics
-vim.diagnostic.config({ virtual_text = false })
+-- Use virtual line diagnostics instead of virtal text
+vim.diagnostic.config({ signs = false, virtual_text = false, virtual_lines = true })
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -77,10 +77,28 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '[d', function()
+	vim.diagnostic.jump({ count = 1 })
+end, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', function()
+	vim.diagnostic.jump({ count = -1 })
+end, { desc = 'Go to next diagnostic message' })
+-- kinda redundant now since virtual lines do the same thing
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- diagnostics
+vim.keymap.set('n', '<leader>ea', function()
+	vim.diagnostic.config(vim.tbl_deep_extend('force', vim.diagnostic.config(), { virtual_lines = true }))
+end, { desc = '[A]ll Diagnostics' })
+vim.keymap.set('n', '<leader>ec', function()
+	vim.diagnostic.config(
+		vim.tbl_deep_extend('force', vim.diagnostic.config(), { virtual_lines = { current_line = true } })
+	)
+end, { desc = '[C]urrent Diagnostics' })
+vim.keymap.set('n', '<leader>en', function()
+	vim.diagnostic.config(vim.tbl_deep_extend('force', vim.diagnostic.config(), { virtual_lines = false }))
+end, { desc = '[N]o Diagnostics' })
 
 -- Yank to clipboard
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })

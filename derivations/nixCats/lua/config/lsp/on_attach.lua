@@ -35,7 +35,7 @@ return function(_, bufnr)
 	end, '[W]orkspace [S]ymbols')
 
 	-- Show diagnostics on hover
-	vim.api.nvim_create_autocmd('CursorHold', {
+	--[[ vim.api.nvim_create_autocmd('CursorHold', {
 		buffer = bufnr,
 		callback = function()
 			local opts = {
@@ -48,7 +48,8 @@ return function(_, bufnr)
 			}
 			vim.diagnostic.open_float(nil, opts)
 		end,
-	})
+	}) ]]
+	-- Automatically format file on save (I think)
 	-- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
 	--   vim.lsp.buf.format()
 	-- end, { desc = 'Format current buffer with LSP' })

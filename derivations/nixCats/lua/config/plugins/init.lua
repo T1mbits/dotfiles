@@ -1,11 +1,9 @@
--- TODO help me
 require('lze').load({
-	{ import = 'config.plugins.telescope' },
-	{ import = 'config.plugins.treesitter' },
 	{ import = 'config.plugins.cmp' },
-	{ import = 'config.plugins.alpha' },
-	{ import = 'config.plugins.indent_blankline' },
-	{ import = 'config.plugins.lualine' },
+	{ import = 'config.plugins.format' },
+	{ import = 'config.plugins.snacks' },
+	{ import = 'config.plugins.treesitter' },
+	{ import = 'config.plugins.ui' },
 	{
 		'cellular-automaton.nvim',
 		for_cat = 'general.fun',
@@ -15,36 +13,15 @@ require('lze').load({
 		'comment.nvim',
 		for_cat = 'general.utils',
 		event = 'DeferredUIEnter',
-		after = function(plugin)
+		after = function(_)
 			require('Comment').setup({})
-		end,
-	},
-	{
-		'dressing.nvim',
-		for_cat = 'general.ui',
-		event = 'DeferredUIEnter',
-	},
-	{
-		'fidget.nvim',
-		for_cat = 'general.ui',
-		event = 'DeferredUIEnter',
-		after = function(plugin)
-			require('fidget').setup({})
-		end,
-	},
-	{
-		'gitsigns.nvim',
-		for_cat = 'general.ui',
-		event = 'DeferredUIEnter',
-		after = function(plugin)
-			require('gitsigns').setup({ signs_staged_enable = false })
 		end,
 	},
 	{
 		'harpoon',
 		for_cat = 'general.utils',
 		event = 'DeferredUIEnter',
-		after = function(plugin)
+		after = function(_)
 			local ui = require('harpoon.ui')
 
 			vim.keymap.set('n', '<leader>m', function()
@@ -66,7 +43,7 @@ require('lze').load({
 		for_cat = 'general.lsp',
 		cmd = { 'LazyDev' },
 		ft = 'lua',
-		after = function(plugin)
+		after = function(_)
 			require('lazydev').setup({
 				library = {
 					{ words = { 'nixCats' }, path = (require('nixCats').nixCatsPath or '') .. '/lua' },
@@ -75,18 +52,10 @@ require('lze').load({
 		end,
 	},
 	{
-		'render-markdown.nvim',
-		for_cat = 'general.ui',
-		ft = 'markdown',
-		after = function(plugin)
-			require('render-markdown').setup({})
-		end,
-	},
-	{
 		'nvim-autopairs',
 		for_cat = 'general.utils',
 		event = 'InsertEnter',
-		after = function(plugin)
+		after = function(_)
 			require('nvim-autopairs').setup({})
 		end,
 	},
@@ -94,7 +63,7 @@ require('lze').load({
 		'nvim-surround',
 		for_cat = 'general.utils',
 		event = 'DeferredUIEnter',
-		after = function(plugin)
+		after = function(_)
 			require('nvim-surround').setup({})
 		end,
 	},
@@ -102,28 +71,24 @@ require('lze').load({
 		'project.nvim',
 		for_cat = 'general.utils',
 		event = 'DeferredUIEnter',
-		after = function(plugin)
+		after = function(_)
 			require('project_nvim').setup({})
-		end,
-	},
-	{
-		'todo-comments.nvim',
-		for_cat = 'general.ui',
-		event = 'DeferredUIEnter',
-		after = function(plugin)
-			require('todo-comments').setup({})
 		end,
 	},
 	{
 		'which-key.nvim',
 		for_cat = 'general.binds',
 		event = 'DeferredUIEnter',
-		after = function(plugin)
+		after = function(_)
 			require('which-key').setup()
 			require('which-key').add({
-				{ '<leader>b', group = '[B]uffer', icon = { icon = '' } },
-				{ '<leader>s', group = '[S]earch', icon = { icon = '󰭎' } },
-				{ '<leader>g', group = '[G]it', icon = { icon = '' } },
+				{ '<leader>b', group = '[B]uffer', icon = { icon = '', hl = 'WhichKeyNormal' } },
+				{ '<leader>s', group = '[S]earch', icon = { icon = '󰭎', hl = 'WhichKeyNormal' } },
+				{ '<leader>g', group = '[G]it', icon = { icon = '', hl = 'WhichKeyNormal' } },
+				{ '<leader>e', group = 'Diagnostic Messages', icon = { icon = '󱖫', hl = 'WhichKeyNormal' } },
+				{ '<leader>F', group = '[F]ormat', icon = { icon = '󰉼', hl = 'WhichKeyNormal' } },
+				{ '<leader>FF', icon = { icon = '󰈔', hl = 'WhichKeyNormal' } },
+				{ '<leader>c', group = '[C]ode', icon = { icon = '', hl = 'WhichKeyNormal' } },
 			})
 		end,
 	},
