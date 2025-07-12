@@ -1,5 +1,5 @@
 require('lze').load({
-	{ import = 'config.plugins.cmp' },
+	{ import = 'config.plugins.completion' },
 	{ import = 'config.plugins.format' },
 	{ import = 'config.plugins.snacks' },
 	{ import = 'config.plugins.treesitter' },
@@ -7,7 +7,7 @@ require('lze').load({
 	{
 		'cellular-automaton.nvim',
 		for_cat = 'general.fun',
-		event = 'DeferredUIEnter',
+		cmd = { 'CellularAutomaton' },
 	},
 	{
 		'comment.nvim',
@@ -18,11 +18,30 @@ require('lze').load({
 		end,
 	},
 	{
-		'harpoon',
+		'harpoon2',
 		for_cat = 'general.utils',
 		event = 'DeferredUIEnter',
 		after = function(_)
-			local ui = require('harpoon.ui')
+			local harpoon = require('harpoon')
+
+			harpoon:setup()
+
+			vim.keymap.set('n', '<leader>ha', function()
+				harpoon:list():add()
+			end, { desc = '[A]dd file' })
+			vim.keymap.set('n', '<leader>hr', function()
+				harpoon:list():remove()
+			end, { desc = '[R]emove file' })
+			vim.keymap.set('n', '<leader>hl', function()
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end, { desc = '[L]ist files' })
+
+			for i = 1, 5, 1 do
+				vim.keymap.set('n', 'g' .. i, function()
+					harpoon:list():select(i)
+				end, { desc = 'Harpoon: Go to file [' .. i .. ']' })
+			end
+			--[[ local ui = require('harpoon.ui')
 
 			vim.keymap.set('n', '<leader>m', function()
 				require('harpoon.mark').add_file()
@@ -35,7 +54,7 @@ require('lze').load({
 			end, { desc = 'Go to file 2' })
 			vim.keymap.set('n', 'g3', function()
 				ui.nav_file(3)
-			end, { desc = 'Go to file 3' })
+			end, { desc = 'Go to file 3' }) ]]
 		end,
 	},
 	{
@@ -89,7 +108,29 @@ require('lze').load({
 				{ '<leader>F', group = '[F]ormat', icon = { icon = '󰉼', hl = 'WhichKeyNormal' } },
 				{ '<leader>FF', icon = { icon = '󰈔', hl = 'WhichKeyNormal' } },
 				{ '<leader>c', group = '[C]ode', icon = { icon = '', hl = 'WhichKeyNormal' } },
+				{ '<leader>h', group = '[H]arpoon', icon = { icon = '󰛢', hl = 'WhichKeyNormal' } },
 			})
+		end,
+	},
+	{
+		'oil.nvim',
+		for_cat = 'general.utils',
+		after = function(_)
+			require('oil').setup({
+				win_options = {
+					signcolumn = 'yes:2',
+				},
+			})
+			vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open Parent Directory' })
+			vim.keymap.set('n', '<leader>-', '<CMD>Oil .<CR>', { desc = 'Open Project Root' })
+		end,
+	},
+	{
+		'oil-git-status.nvim',
+		for_cat = 'general.status',
+		priority = 49,
+		after = function(_)
+			require('oil-git-status').setup({})
 		end,
 	},
 })

@@ -38,6 +38,11 @@ in
         bind -n M-L resize-pane -R
         bind -n M-K resize-pane -U
         bind -n M-J resize-pane -D
+
+        bind -n C-M-H resize-pane -L 5
+        bind -n C-M-L resize-pane -R 5
+        bind -n C-M-K resize-pane -U 5
+        bind -n C-M-J resize-pane -D 5
       '';
     };
   };

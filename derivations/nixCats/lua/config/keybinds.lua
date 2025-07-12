@@ -1,68 +1,3 @@
--- Set mapleader. Must be set before loading plugins
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- Display whitespace characters
-vim.opt.list = true
-vim.opt.listchars = { tab = '▎ ', --[[ eol = '↵', ]] trail = '·', nbsp = '␣' }
-
--- Hide default mode and search count indicator (lualine provides the indicators)
-vim.o.showmode = false
-vim.o.shortmess = vim.o.shortmess .. 'S'
-
--- Highlight on search, turn off highlight with esc
-vim.opt.hlsearch = true
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Preview substitutions as you type
-vim.opt.inccommand = 'split'
-
--- Minimum amount of lines above/below cursor
-vim.opt.scrolloff = 10
-
--- Line numbers by default
-vim.wo.number = true
-
--- Indenting
-vim.o.smarttab = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-
--- Save undo history
-vim.o.undofile = true
-
--- Case-insensitive search unless \C or capitals in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Enable signcolumn and relative line numbers by default
--- x amount of signcolumn slots simultaneously
-vim.wo.signcolumn = 'yes:1'
-vim.wo.relativenumber = true
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-
--- Completion menu
-vim.o.completeopt = 'menu,preview,noselect'
-
--- Enable 24-bit colour support
-vim.o.termguicolors = true
-
--- Use virtual line diagnostics instead of virtal text
-vim.diagnostic.config({ signs = false, virtual_text = false, virtual_lines = true })
-
--- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-	callback = function()
-		vim.hl.on_yank()
-	end,
-	group = highlight_group,
-	pattern = '*',
-})
-
 -- Basic keymaps
 vim.keymap.set({ 'n', 'v', 'x' }, '<C-a>', 'gg0vG$', { noremap = true, silent = true, desc = 'Select all' })
 
@@ -123,3 +58,17 @@ vim.keymap.set(
 	'"_dP',
 	{ noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' }
 )
+
+-- LSP
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP: [C]ode [A]ction' })
+vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, { desc = 'LSP: Type [D]efinition' })
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'LSP: [R]e[n]ame' })
+vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'LSP: [W]orkspace [A]dd Folder' })
+vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'LSP: [W]orkspace [R]emove Folder' })
+vim.keymap.set('n', '<leader>wl', function()
+	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end, { desc = 'LSP: [W]orkspace [L]ist Folders' })
+vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'LSP: Signature Documentation' })
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'LSP: [G]oto [D]eclaration' })
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'LSP: [G]oto [D]efinition' })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'LSP: Hover Documentation' })

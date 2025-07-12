@@ -3,7 +3,9 @@
 require('lze').register_handlers(require('nixCatsUtils.lzUtils').for_cat)
 require('lze').register_handlers(require('lzextras').lsp)
 
-require('config.opts&keys')
+require('config.opts')
+require('config.keybinds')
+
 require('config.indent')
 
 require('config.plugins')

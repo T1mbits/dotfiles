@@ -23,9 +23,7 @@ return {
 		after = function(_)
 			require('fidget').setup({
 				notification = {
-					override_vim_notify = true,
 					window = {
-						-- border = 'rounded',
 						winblend = 0,
 					},
 				},
@@ -58,15 +56,17 @@ return {
 	},
 	{
 		'transparent.nvim',
-		for_cat = 'general.ui',
+		for_cat = 'general.ui.colorscheme',
 		after = function(_)
-			vim.g.transparent_groups =
-				vim.list_extend(vim.g.transparent_groups or {}, { 'TelescopeNormal', 'TelescopeBorder' })
+			vim.g.transparent_groups = vim.list_extend(vim.g.transparent_groups or {}, {
+				'TelescopeNormal',
+				'TelescopeBorder',
+			})
 		end,
 	},
 	{
 		'bluloco.nvim',
-		for_cat = 'general.ui',
+		for_cat = 'general.ui.colorscheme',
 		after = function(_)
 			require('bluloco').setup({
 				transparent = true,

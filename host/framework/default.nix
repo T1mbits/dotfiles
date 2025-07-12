@@ -107,6 +107,10 @@
   custom.services = {
     headscale.enable = true;
     tailscale.enable = true;
+    zerotier = {
+      enable = true;
+      joinNetworks = [ "d5e5fb65370b847c" ];
+    };
   };
 
   # List packages installed in system profile. To search, run:

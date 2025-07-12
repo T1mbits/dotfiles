@@ -5,6 +5,7 @@
 let
   inherit (inputs) nixpkgs;
   inherit (inputs.nixCats) utils;
+
   luaPath = "${./.}";
   forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
   extra_pkg_config = { };
@@ -61,29 +62,39 @@ let
         general = with pkgs.vimPlugins; [
           lze
           lzextras
-          plenary-nvim
           nvim-web-devicons
+          plenary-nvim
         ];
       };
 
       optionalPlugins = with pkgs.vimPlugins; {
-        general = {
-          cmp = [
-            nvim-cmp
-            luasnip
-            friendly-snippets
-            cmp_luasnip
-            cmp-buffer
-            cmp-path
-            cmp-nvim-lua
-            cmp-nvim-lsp
-            cmp-cmdline
-            cmp-nvim-lsp-signature-help
-            lspkind-nvim
-          ];
+        format = [
+          conform-nvim
+        ];
 
-          format = [
-            conform-nvim
+        general = {
+          /*
+            cmp = [
+              nvim-cmp
+              friendly-snippets
+              cmp_luasnip
+              cmp-buffer
+              cmp-cmdline
+              cmp-path
+              cmp-nvim-lua
+              cmp-nvim-lsp
+              cmp-nvim-lsp-signature-help
+              lspkind-nvim
+              luasnip
+            ];
+          */
+
+          completion = [
+            blink-cmp
+            blink-compat
+            cmp-cmdline
+            colorful-menu-nvim
+            luasnip
           ];
 
           fun = [
@@ -116,6 +127,7 @@ let
               fidget-nvim
               gitsigns-nvim
               lualine-nvim
+              oil-git-status-nvim
             ];
 
             telescope = [
@@ -137,10 +149,12 @@ let
 
           utils = [
             comment-nvim
-            harpoon
+            # harpoon
+            harpoon2
             nvim-autopairs
-            project-nvim
             nvim-surround
+            oil-nvim
+            project-nvim
             trouble-nvim
           ];
 
