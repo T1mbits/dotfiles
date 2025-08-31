@@ -1,6 +1,5 @@
 require('config.scripts.eol_marker')
--- disabled temporarily
--- require('config.scripts.diagnostic_sign_column')
+require('config.scripts.diagnostic_sign_column')
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })

@@ -100,8 +100,8 @@ return {
 
 					['<CR>'] = { 'select_and_accept', 'fallback' },
 
-					['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
-					['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+					['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+					['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
 
 					['<C-k>'] = { 'show_signature' },
 				},
