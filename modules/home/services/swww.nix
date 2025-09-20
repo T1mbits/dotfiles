@@ -30,10 +30,10 @@ in
       };
     };
 
-    home.activation = {
+    /* home.activation = {
       changeSwwwWallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run ${pkgs.swww}/bin/swww img ${cfg.wallpaper} --transition-type grow --transition-fps 60 --transition-duration 5
       '';
-    };
+    }; */
   };
 }
