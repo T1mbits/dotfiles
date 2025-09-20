@@ -176,10 +176,6 @@ in
             };
           };
 
-          gestures = {
-            workspace_swipe = false;
-          };
-
           "$mod" = "SUPER";
           bind =
             [
