@@ -189,14 +189,14 @@ in
             ", XF86AudioPlay, exec, playerctl play-pause"
             ", XF86AudioNext, exec, playerctl next"
 
-            "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+            "$mod, V, exec, cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy"
 
             "$mod, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m output -m active --silent"
             "$mod CONTROL, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m window  --silent"
             "$mod SHIFT, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m region --silent"
 
             # (mkIf config.hm.programs.ags.enable "$mod, Tab, exec, ags toggle launcher")
-            "$mod, Tab, exec, bash -c 'pgrep -x rofi >/dev/null && pkill -x rofi || rofi -show drun'"
+            "$mod, Tab, exec, bash -c 'pgrep -x rofi >/dev/null && pkill -x rofi || rofi -show drun -drun-match-fields name'"
 
             "$mod, 0, workspace, 10"
             "$mod SHIFT, 0, movetoworkspace, 10"
