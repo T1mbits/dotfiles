@@ -6,7 +6,6 @@
 }:
 with lib;
 let
-  cursorTheme = "Bibata-Modern-Classic";
   cursorSize = 20;
   cfg = config.hm.configs.hyprland;
 in
@@ -15,6 +14,7 @@ in
     enable = mkEnableOption "Enable Hyprland configs";
     laptop = mkEnableOption "Enable laptop specific configs, such as brightness control binds.";
     hyprsunset = mkEnableOption "Enable automatic Hyprsunset";
+    hyprlock_idle = mkEnableOption "Enable hyprlock and hypridle";
     monitors = mkOption {
       type = types.listOf types.str;
       default = null;
@@ -43,6 +43,12 @@ in
             }
           ];
         };
+      };
+    })
+    (mkIf cfg.hyprlock_idle {
+      programs.hyprlock = {
+        enable = true;
+
       };
     })
     {
