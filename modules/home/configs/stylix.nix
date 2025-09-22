@@ -34,7 +34,7 @@ in
     stylix = {
       enable = true;
 
-      image = themeDir + "/wallpaper.jpg";
+      image = themeDir + "/wallpaper.png";
       base16Scheme = themeDir + "/colours.yaml";
 
       fonts = {
