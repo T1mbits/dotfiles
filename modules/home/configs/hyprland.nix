@@ -31,25 +31,17 @@ in
     (mkIf cfg.hyprsunset {
       services.hyprsunset = {
         enable = true;
-        transitions = {
-          sunrise = {
-            calendar = "*-*-* 06:00:00";
-            requests = [
-              [
-                "temperature"
-                "6000"
-              ]
-            ];
-          };
-          sunset = {
-            calendar = "*-*-* 21:00:00";
-            requests = [
-              [
-                "temperature"
-                "3000"
-              ]
-            ];
-          };
+        settings = {
+          profile = [
+            {
+              time = "6:00";
+              temperature = "6000";
+            }
+            {
+              time = "21:00";
+              temperature = "3000";
+            }
+          ];
         };
       };
     })
@@ -61,6 +53,7 @@ in
           wofi
           hyprshot
           hyprpolkitagent
+          rofi
         ];
 
         # pointerCursor = {
@@ -177,49 +170,49 @@ in
           };
 
           "$mod" = "SUPER";
-          bind =
-            [
-              "$mod, Return, exec, kitty"
+          bind = [
+            "$mod, Return, exec, kitty"
 
-              "$mod, Q, killactive"
-              "$mod, F, togglefloating,"
-              "$mod, P, pseudo,"
-              "$mod, J, togglesplit,"
+            "$mod, Q, killactive"
+            "$mod, F, togglefloating,"
+            "$mod, P, pseudo,"
+            "$mod, J, togglesplit,"
 
-              "$mod, left, movefocus, l"
-              "$mod, right, movefocus, r"
-              "$mod, up, movefocus, u"
-              "$mod, down, movefocus, d"
+            "$mod, left, movefocus, l"
+            "$mod, right, movefocus, r"
+            "$mod, up, movefocus, u"
+            "$mod, down, movefocus, d"
 
-              ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+            ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
 
-              ", XF86AudioPrev, exec, playerctl previous"
-              ", XF86AudioPlay, exec, playerctl play-pause"
-              ", XF86AudioNext, exec, playerctl next"
+            ", XF86AudioPrev, exec, playerctl previous"
+            ", XF86AudioPlay, exec, playerctl play-pause"
+            ", XF86AudioNext, exec, playerctl next"
 
-              "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+            "$mod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
 
-              "$mod, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m output -m active --silent"
-              "$mod CONTROL, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m window  --silent"
-              "$mod SHIFT, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m region --silent"
+            "$mod, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m output -m active --silent"
+            "$mod CONTROL, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m window  --silent"
+            "$mod SHIFT, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m region --silent"
 
-              (mkIf config.hm.programs.ags.enable "$mod, Tab, exec, ags toggle launcher")
+            # (mkIf config.hm.programs.ags.enable "$mod, Tab, exec, ags toggle launcher")
+            "$mod, Tab, exec, rofi -show drun"
 
-              "$mod, 0, workspace, 10"
-              "$mod SHIFT, 0, movetoworkspace, 10"
-            ]
-            ++ (builtins.concatLists (
-              builtins.genList (
-                i:
-                let
-                  ws = i + 1;
-                in
-                [
-                  "$mod, code:1${toString i}, workspace, ${toString ws}"
-                  "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-                ]
-              ) 9
-            ));
+            "$mod, 0, workspace, 10"
+            "$mod SHIFT, 0, movetoworkspace, 10"
+          ]
+          ++ (builtins.concatLists (
+            builtins.genList (
+              i:
+              let
+                ws = i + 1;
+              in
+              [
+                "$mod, code:1${toString i}, workspace, ${toString ws}"
+                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+              ]
+            ) 9
+          ));
 
           binde = [
             ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 10%-"

@@ -31,7 +31,6 @@
 
       python3
 
-      kicad
       gnuplot
     ];
 
@@ -85,7 +84,7 @@
         clientId = "f999b60be23f46c394ba8c738deea165";
         deviceName = "nixfred spotify_player";
       };
-      todocli.enable = true;
+      todocli.enable = false;
       vesktop = {
         enable = true;
 
