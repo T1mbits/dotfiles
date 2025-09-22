@@ -196,7 +196,7 @@ in
             "$mod SHIFT, S, exec, hyprshot --output-folder ~/Pictures/Screenshots --freeze -m region --silent"
 
             # (mkIf config.hm.programs.ags.enable "$mod, Tab, exec, ags toggle launcher")
-            "$mod, Tab, exec, rofi -show drun"
+            "$mod, Tab, exec, bash -c 'pgrep -x rofi >/dev/null && pkill -x rofi || rofi -show drun'"
 
             "$mod, 0, workspace, 10"
             "$mod SHIFT, 0, movetoworkspace, 10"
