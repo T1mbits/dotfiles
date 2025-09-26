@@ -17,10 +17,18 @@ in
       description = "Use systemd-boot as the system bootloader";
     };
 
-    networkManager = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable networkmanager";
+    networkManager = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable networkmanager";
+      };
+
+      connectivity = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable networkmanager's connectivity check feature";
+      };
     };
   };
 
@@ -39,6 +47,17 @@ in
       efi.canTouchEfiVariables = true;
     };
 
-    networking.networkmanager.enable = mkIf cfg.networkManager true;
+    networking.networkmanager = {
+      enable = mkIf cfg.networkManager.enable true;
+      settings = mkIf cfg.networkManager.connectivity {
+        connectivity = {
+          enabled = true;
+          uri = "http://nmcheck.gnome.org/check_network_status.txt";
+          interval = 300;
+          timeout = 20;
+          response = "NetworkManager is online";
+        };
+      };
+    };
   };
 }
