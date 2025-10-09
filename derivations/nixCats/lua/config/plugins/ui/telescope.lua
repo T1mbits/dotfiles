@@ -11,7 +11,7 @@ return {
 			{ '<leader>sg', mode = { 'n' }, desc = '[S]earch [G]rep' },
 			{ '<leader>sk', mode = { 'n' }, desc = '[S]earch [K]eymaps' },
 			{ '<leader>sh', mode = { 'n' }, desc = '[S]earch [H]arpoon Files' },
-			{ '<leader>sp', mode = { 'n' }, desc = '[S]earch [P]rojects' },
+			-- { '<leader>sp', mode = { 'n' }, desc = '[S]earch [P]rojects' },
 			{ '<leader>sw', mode = { 'n' }, desc = '[S]earch [W]ord(s)' },
 			{ '<leader>s/', mode = { 'n' }, desc = '[S]earch [/] in Open Files' },
 			{ '<leader>/', mode = { 'n' }, desc = '[/] Fuzzy search buffer' },
@@ -55,7 +55,7 @@ return {
 			end
 
 			require('telescope').load_extension('fzf')
-			require('telescope').load_extension('projects')
+			-- require('telescope').load_extension('projects')
 			require('telescope').load_extension('ui-select')
 
 			local builtin = require('telescope.builtin')
@@ -69,9 +69,9 @@ return {
 			vim.keymap.set('n', '<leader>sh', function()
 				harpoon_telescope(require('harpoon'):list())
 			end, { desc = '[S]earch [H]arpoon Files' })
-			vim.keymap.set('n', '<leader>sp', function()
+			--[[ vim.keymap.set('n', '<leader>sp', function()
 				require('telescope').extensions.projects.projects({})
-			end, { desc = '[S]earch [P]rojects' })
+			end, { desc = '[S]earch [P]rojects' }) ]]
 			vim.keymap.set('n', '<leader>s/', function()
 				builtin.live_grep({
 					grep_open_files = true,
