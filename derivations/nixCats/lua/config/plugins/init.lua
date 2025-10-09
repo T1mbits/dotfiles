@@ -86,14 +86,14 @@ require('lze').load({
 			require('nvim-surround').setup({})
 		end,
 	},
-	{
+	--[[ {
 		'project.nvim',
 		for_cat = 'general.utils',
 		event = 'DeferredUIEnter',
 		after = function(_)
 			require('project_nvim').setup({})
 		end,
-	},
+	}, ]]
 	{
 		'which-key.nvim',
 		for_cat = 'general.binds',

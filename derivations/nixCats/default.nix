@@ -154,7 +154,7 @@ let
             nvim-autopairs
             nvim-surround
             oil-nvim
-            project-nvim
+            # project-nvim
             trouble-nvim
           ];
 
