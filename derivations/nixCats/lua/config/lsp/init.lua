@@ -83,7 +83,7 @@ require('lze').load({
 		for_cat = 'rust',
 		lsp = {
 			filetypes = { 'rust' },
-			check = { command = 'clippy' },
+			settings = { ['rust-analyzer'] = { check = { command = 'clippy' } } },
 		},
 	},
 	{
