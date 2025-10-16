@@ -40,7 +40,7 @@ local function dashboard_config()
 
 	dashboard.section.buttons.val = {
 		dashboard.button('SPC e', '  New file', '<Cmd>ene<CR>'),
-		dashboard.button('SPC s p', '󰥨  Projects'),
+		-- dashboard.button('SPC s p', '󰥨  Projects'),
 		dashboard.button('SPC s f', '󰈞  Find file'),
 		dashboard.button('SPC q', '  Quit', '<Cmd>qa<CR>'),
 	}
