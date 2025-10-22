@@ -105,4 +105,11 @@ require('lze').load({
 			filetypes = { 'bash', 'sh' },
 		},
 	},
+	{
+		'ts_ls',
+		for_cat = 'typescript',
+		lsp = {
+
+		},
+	}
 })

@@ -56,6 +56,11 @@ let
         bash = with pkgs; [
           bash-language-server
         ];
+
+        typescript = with pkgs; [
+          typescript
+          typescript-language-server
+        ];
       };
 
       startupPlugins = {
@@ -224,6 +229,7 @@ let
           rust = true;
           csharp = true;
           bash = true;
+          typescript = true;
         };
         extra = {
           # to keep the categories table from being filled with non category things that you want to pass
