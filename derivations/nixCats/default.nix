@@ -60,6 +60,7 @@ let
         typescript = with pkgs; [
           typescript
           typescript-language-server
+          vscode-langservers-extracted
         ];
       };
 

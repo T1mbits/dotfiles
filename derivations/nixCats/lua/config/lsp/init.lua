@@ -108,8 +108,11 @@ require('lze').load({
 	{
 		'ts_ls',
 		for_cat = 'typescript',
-		lsp = {
-
-		},
-	}
+		lsp = {},
+	},
+	{
+		'eslint',
+		for_cat = 'typescript',
+		lsp = {},
+	},
 })
