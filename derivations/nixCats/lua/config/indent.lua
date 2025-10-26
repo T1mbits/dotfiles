@@ -16,13 +16,13 @@ end
 
 create_indent_autocmds({
 	{
-		pattern = { 'cs', 'rust' },
+		pattern = { 'cs', 'rust', 'javascript', 'typescript', 'typescriptreact' },
 		tabstop = 4,
 		shiftwidth = 4,
 		expandtab = true,
 	},
 	{
-		pattern = { 'javascript', 'lua', 'python', 'typescript', 'typescriptreact' },
+		pattern = { 'lua', 'python' },
 		tabstop = 4,
 		shiftwidth = 4,
 		expandtab = false,
