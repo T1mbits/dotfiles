@@ -32,6 +32,8 @@
       python3
 
       gnuplot
+
+      pnpm
     ];
 
     sessionVariables = {
