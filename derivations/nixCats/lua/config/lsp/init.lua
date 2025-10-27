@@ -115,4 +115,9 @@ require('lze').load({
 		for_cat = 'typescript',
 		lsp = {},
 	},
+	{
+		'clangd',
+		for_cat = 'cpp',
+		lsp = {},
+	},
 })

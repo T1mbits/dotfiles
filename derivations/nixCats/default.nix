@@ -62,6 +62,10 @@ let
           typescript-language-server
           vscode-langservers-extracted
         ];
+
+        cpp = with pkgs; [
+          clang-tools
+        ];
       };
 
       startupPlugins = {
@@ -231,6 +235,7 @@ let
           csharp = true;
           bash = true;
           typescript = true;
+          cpp = true;
         };
         extra = {
           # to keep the categories table from being filled with non category things that you want to pass
