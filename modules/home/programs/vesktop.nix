@@ -12,10 +12,16 @@ in
   options.hm.programs.vesktop = {
     enable = mkEnableOption "Enable Vesktop";
     ignoreStylix = mkEnableOption "Use default Discord theme instead of Stylix's";
-    plugins = mkOption {
+    enablePlugins = mkOption {
       type = types.listOf types.str;
       default = [ ];
       description = "Vencord plugins to enable automatically";
+    };
+
+    pluginsWithSettings = mkOption {
+      type = types.attrsOf types.attrs;
+      default = { };
+      description = "Declare vencord plugins with options";
     };
 
     customDesktopFile = mkOption {
@@ -29,16 +35,18 @@ in
     programs.vesktop = {
       enable = true;
 
-      vencord.settings.plugins = mkIf (length cfg.plugins > 0) (
-        builtins.listToAttrs (
-          map (name: {
-            inherit name;
-            value = {
-              enabled = true;
-            };
-          }) cfg.plugins
-        )
-      );
+      vencord.settings.plugins =
+        let
+          enabledPlugins = builtins.listToAttrs (
+            map (name: {
+              inherit name;
+              value = {
+                enabled = true;
+              };
+            }) cfg.enablePlugins
+          );
+        in
+        attrsets.recursiveUpdate enabledPlugins cfg.pluginsWithSettings;
     };
 
     xdg.desktopEntries.vesktop = mkIf cfg.customDesktopFile {

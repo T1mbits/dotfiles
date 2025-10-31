@@ -92,7 +92,7 @@
         enable = true;
 
         # I don't use THAT many plugins...
-        plugins = [
+        enablePlugins = [
           "BetterGifPicker"
           "CallTimer"
           "ClearURLs"
@@ -103,12 +103,21 @@
           "FavoriteEmojiFirst"
           "FavoriteGifSearch"
           "FixSpotifyEmbeds"
+          "FixYoutubeEmbeds"
           "MessageLinkEmbeds"
           "MessageLogger"
           "NoF1"
           "PreviewMessage"
           "ReverseImageSearch"
         ];
+
+        pluginsWithSettings = {
+          CustomIdle = {
+            enable = true;
+            idleTimeout = 0.1;
+            remainInIdle = true;
+          };
+        };
       };
       yazi.enable = true;
     };

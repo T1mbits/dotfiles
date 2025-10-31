@@ -12,7 +12,7 @@ let
   themeDir = "${themesDir}/${cfg.theme}";
 in
 {
-  imports = [ inputs.stylix.homeManagerModules.stylix ];
+  imports = [ inputs.stylix.homeModules.stylix ];
 
   options.hm.configs.stylix = {
     enable = mkEnableOption "Enable Stylix";
