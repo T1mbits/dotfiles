@@ -114,7 +114,7 @@
         pluginsWithSettings = {
           CustomIdle = {
             enabled = true;
-            idleTimeout = 0.1;
+            idleTimeout = 1;
             remainInIdle = true;
           };
         };
