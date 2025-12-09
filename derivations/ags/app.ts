@@ -1,4 +1,5 @@
-import { App, Gdk, Gtk } from 'astal/gtk3';
+import app from 'ags/gtk3/app'
+import { Gdk, Gtk } from 'gi://Gtk?version=3.0';
 import style from './style/default.scss';
 import Bar from './widget/Bar';
 import Launcher from './widget/Launcher';

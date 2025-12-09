@@ -1,4 +1,6 @@
 {
+  description = "My Awesome Desktop Shell";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
@@ -17,47 +19,66 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      pname = "my-shell";
+      entry = "app.ts";
+
+      astalPackages = with ags.packages.${system}; [
+        io
+        astal4 # or astal3 for gtk3
+        notifd
+        tray
+        wireplumber
+        apps
+        auth
+        battery
+        bluetooth
+        cava
+        greet
+        hyprland
+        mpris
+        network
+        powerprofiles
+      ];
+
+      extraPackages = astalPackages ++ [
+        pkgs.libadwaita
+        pkgs.libsoup_3
+        pkgs.upower
+      ];
     in
     {
       packages.${system} = {
-        default = ags.lib.bundle {
-          inherit pkgs;
+        default = pkgs.stdenv.mkDerivation {
+          name = pname;
           src = ./.;
-          name = "desktop";
-          entry = "app.ts";
 
-          # additional libraries and executables to add to gjs' runtime
-          extraPackages = [
-            ags.packages.${system}.apps
-            ags.packages.${system}.auth
-            ags.packages.${system}.battery
-            pkgs.upower
-            ags.packages.${system}.bluetooth
-            ags.packages.${system}.cava
-            ags.packages.${system}.greet
-            ags.packages.${system}.hyprland
-            ags.packages.${system}.mpris
-            ags.packages.${system}.network
-            ags.packages.${system}.notifd
-            ags.packages.${system}.powerprofiles
-            ags.packages.${system}.tray
-            ags.packages.${system}.wireplumber
+          nativeBuildInputs = with pkgs; [
+            wrapGAppsHook3
+            gobject-introspection
+            ags.packages.${system}.default
           ];
+
+          buildInputs = extraPackages ++ [ pkgs.gjs ];
+
+          installPhase = ''
+            runHook preInstall
+
+            mkdir -p $out/bin
+            mkdir -p $out/share
+            cp -r * $out/share
+            ags bundle ${entry} --gtk 3 $out/bin/${pname} -d "SRC='$out/share'"
+
+            runHook postInstall
+          '';
         };
       };
 
       devShells.${system} = {
         default = pkgs.mkShell {
           buildInputs = [
-            # includes all Astal libraries
-            ags.packages.${system}.agsFull
-
-            # includes astal3 astal4 astal-io by default
-            # (ags.packages.${system}.default.override {
-            #   extraPackages = [
-            #     # cherry pick packages
-            #   ];
-            # })
+            (ags.packages.${system}.default.override {
+              inherit extraPackages;
+            })
           ];
         };
       };

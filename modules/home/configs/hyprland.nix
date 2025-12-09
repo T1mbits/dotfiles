@@ -94,7 +94,8 @@ in
             "wl-paste --type image --watch cliphist store"
             "systemctl --user start hyprpolkitagent"
             "systemctl --user start swww-daemon"
-            "desktop"
+            # "desktop"
+            "waybar"
             "spotify --ozone-platform=wayland"
             "vesktop --ozone-platform=wayland"
           ];

@@ -34,6 +34,7 @@
       gnuplot
 
       pnpm
+      waybar
     ];
 
     sessionVariables = {
@@ -77,7 +78,7 @@
     };
 
     programs = {
-      ags.enable = true;
+      # ags.enable = true;
       nixbits.enable = true;
       prism-launcher.enable = true;
       shell-utils.enable = true;
